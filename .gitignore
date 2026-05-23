@@ -34,3 +34,20 @@ npm-debug.log*
 # Misc
 .DS_Store
 *.pem
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Generated code (API client codegen)
+packages/api-client/src/generated/
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

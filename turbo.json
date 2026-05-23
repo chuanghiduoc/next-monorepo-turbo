@@ -1,24 +1,57 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": ["NODE_ENV", "SKIP_ENV_VALIDATION"],
+  "globalPassThroughEnv": ["CI"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "env": [
+        "NEXT_PUBLIC_APP_URL",
+        "BACKEND_URL",
+        "LOG_LEVEL",
+        "PLAYWRIGHT_BASE_URL",
+        "PLAYWRIGHT_SKIP_WEBSERVER"
+      ]
     },
     "format": {
       "dependsOn": ["^format"]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^typecheck"],
+      "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"]
+    },
+    "test:e2e": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "env": [
+        "NEXT_PUBLIC_APP_URL",
+        "BACKEND_URL",
+        "LOG_LEVEL",
+        "PLAYWRIGHT_BASE_URL",
+        "PLAYWRIGHT_SKIP_WEBSERVER"
+      ]
+    },
+    "codegen": {
+      "cache": false,
+      "outputs": ["src/generated/**"],
+      "env": ["BACKEND_URL", "API_OPENAPI_URL"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"]
     }
   }
 }

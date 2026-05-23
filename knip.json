@@ -1,0 +1,32 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["commitlint.config.js"],
+      "project": ["*.{js,ts}"]
+    },
+    "apps/web": {
+      "entry": [
+        "app/**/{page,layout,template,error,loading,not-found,route}.{ts,tsx}",
+        "middleware.ts",
+        "next.config.ts",
+        "i18n/request.ts",
+        "tests/**/*.{test,spec}.{ts,tsx}",
+        "tests/e2e/**/*.spec.ts",
+        "playwright.config.ts",
+        "vitest.config.ts"
+      ],
+      "project": ["**/*.{ts,tsx}"],
+      "ignore": ["**/*.d.ts", ".next/**", "node_modules/**"]
+    },
+    "packages/ui": {
+      "entry": ["src/**/*.{ts,tsx}"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/api-client": {
+      "entry": ["src/index.ts", "orval.config.ts"],
+      "project": ["src/**/*.ts"],
+      "ignore": ["src/generated/**"]
+    }
+  }
+}

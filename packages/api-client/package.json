@@ -1,0 +1,35 @@
+{
+  "name": "@workspace/api-client",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "codegen": "orval --config ./orval.config.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./types": "./src/types/index.ts",
+    "./generated": "./src/generated/index.ts",
+    "./axios": "./src/lib/axios-instance.ts"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.100.14",
+    "axios": "^1.16.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "@types/react": "^19.2.14",
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "eslint": "^9.39.2",
+    "orval": "^8.12.3",
+    "react": "^19.2.4",
+    "typescript": "^5.9.3"
+  }
+}

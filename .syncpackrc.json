@@ -1,0 +1,35 @@
+{
+  "indent": "  ",
+  "sortFirst": [
+    "name",
+    "version",
+    "type",
+    "private",
+    "scripts",
+    "exports",
+    "main",
+    "dependencies",
+    "peerDependencies",
+    "devDependencies"
+  ],
+  "versionGroups": [
+    {
+      "label": "internal workspace packages",
+      "dependencies": ["@workspace/**"],
+      "dependencyTypes": ["dev", "prod", "peer"],
+      "pinVersion": "workspace:*"
+    }
+  ],
+  "semverGroups": [
+    {
+      "label": "exact pin types and devtools",
+      "dependencies": ["typescript", "turbo", "next", "react", "react-dom"],
+      "range": ""
+    },
+    {
+      "label": "caret for the rest",
+      "dependencies": ["**"],
+      "range": "^"
+    }
+  ]
+}
