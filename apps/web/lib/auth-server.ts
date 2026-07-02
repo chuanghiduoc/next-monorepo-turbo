@@ -1,6 +1,7 @@
 import "server-only"
 
 import { headers } from "next/headers"
+import { cache } from "react"
 
 import { env } from "@/lib/env"
 
@@ -20,8 +21,11 @@ interface Session {
 /**
  * Server-side session lookup. Skips the public proxy and talks to the backend
  * directly — we're already on the server, so no extra hop needed.
+ *
+ * Wrapped in React.cache() so multiple RSCs in the same request share a single
+ * backend round-trip instead of each re-fetching the session.
  */
-export async function getServerSession(): Promise<Session | null> {
+export const getServerSession = cache(async (): Promise<Session | null> => {
   const cookie = (await headers()).get("cookie") ?? ""
 
   try {
@@ -40,4 +44,4 @@ export async function getServerSession(): Promise<Session | null> {
   } catch {
     return null
   }
-}
+})

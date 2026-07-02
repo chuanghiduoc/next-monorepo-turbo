@@ -21,11 +21,27 @@ import { signIn } from "@/lib/auth-client"
 import { loginSchema, type LoginInput } from "@/lib/validation/auth"
 import { useRouter } from "@/i18n/navigation"
 
+/**
+ * Only allow same-origin, non-protocol-relative paths as a post-login target,
+ * otherwise `?next=https://evil.com` / `?next=//evil.com` becomes an open redirect.
+ */
+function getSafeNext(raw: string | null): string {
+  if (
+    raw &&
+    raw.startsWith("/") &&
+    !raw.startsWith("//") &&
+    !raw.startsWith("/\\")
+  ) {
+    return raw
+  }
+  return "/dashboard"
+}
+
 function LoginForm() {
   const t = useTranslations()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const next = searchParams.get("next") ?? "/dashboard"
+  const next = getSafeNext(searchParams.get("next"))
   const [submitting, setSubmitting] = useState(false)
 
   const form = useForm<LoginInput>({

@@ -8,12 +8,14 @@ import { createAuthClient } from "better-auth/react"
  * Resolved at runtime against `window.location.origin` so the same image works
  * on any host/port. The SSR fallback is only used during build prerendering
  * — it is never actually called (auth client runs in the browser).
+ * @public
  */
 const baseURL =
   typeof window === "undefined"
     ? "http://localhost/api/auth"
     : `${window.location.origin}/api/auth`
 
+/** @public */
 export const authClient = createAuthClient({
   baseURL,
   fetchOptions: {
@@ -21,4 +23,5 @@ export const authClient = createAuthClient({
   },
 })
 
+/** @public */
 export const { useSession, signIn, signOut, signUp, getSession } = authClient
