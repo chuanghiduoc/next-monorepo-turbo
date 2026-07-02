@@ -1,0 +1,40 @@
+# Dependabot cấu hình cho security updates.
+# Renovate (renovate.json) phụ trách version bumps thông thường.
+# open-pull-requests-limit: 0 => Dependabot CHỈ mở PR cho SECURITY updates,
+# không tạo PR version-bump => tránh trùng lặp/noise với Renovate.
+# Ngoài file này, cần bật ở repo Settings > Advanced Security:
+#   - Dependabot alerts
+#   - Dependabot security updates
+version: 2
+updates:
+  # JavaScript/TypeScript deps (đọc pnpm-lock.yaml)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Ho_Chi_Minh"
+    open-pull-requests-limit: 0
+    labels:
+      - "dependencies"
+      - "security"
+    commit-message:
+      prefix: "fix"
+      include: "scope"
+
+  # GitHub Actions dùng trong workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Ho_Chi_Minh"
+    open-pull-requests-limit: 0
+    labels:
+      - "github-actions"
+      - "security"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
