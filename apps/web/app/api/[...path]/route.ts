@@ -47,6 +47,9 @@ async function proxy(
 ): Promise<NextResponse> {
   const { path } = await context.params
   const target = buildTargetUrl(request, path)
+  // Log only the sanitized upstream path — never the backend host or query
+  // string, which may carry internal topology and PII.
+  const logPath = `/api/${path.join("/")}`
 
   const method = request.method
   const init: RequestInit = {
@@ -65,13 +68,13 @@ async function proxy(
   try {
     upstream = await fetch(target, init)
   } catch (error) {
-    logger.error({ target, method, err: error }, "proxy upstream failed")
+    logger.error({ path: logPath, method, err: error }, "proxy upstream failed")
     return NextResponse.json({ message: "Bad gateway" }, { status: 502 })
   }
 
   logger.debug(
     {
-      target,
+      path: logPath,
       method,
       status: upstream.status,
       durationMs: Date.now() - startedAt,
