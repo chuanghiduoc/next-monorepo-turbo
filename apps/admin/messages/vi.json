@@ -1,0 +1,140 @@
+{
+  "common": {
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "signingIn": "Đang đăng nhập…",
+    "signingOut": "Đang đăng xuất…",
+    "createAccount": "Tạo tài khoản",
+    "creating": "Đang tạo…",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "name": "Họ tên"
+  },
+  "auth": {
+    "loginTitle": "Đăng nhập quản trị",
+    "loginSubtitle": "Khu vực hạn chế. Chỉ dành cho vận hành viên được cấp quyền.",
+    "registerTitle": "Tạo tài khoản vận hành",
+    "registerSubtitle": "Cấp một vận hành viên quản trị mới.",
+    "signInFailed": "Đăng nhập thất bại",
+    "signUpFailed": "Tạo tài khoản thất bại",
+    "accountCreated": "Đã tạo tài khoản",
+    "noAccount": "Cần tài khoản vận hành?",
+    "haveAccount": "Đã là vận hành viên?",
+    "signUpLink": "Yêu cầu cấp quyền",
+    "signInLink": "Đăng nhập",
+    "forgotPassword": "Quên mật khẩu?",
+    "orContinue": "hoặc tiếp tục với email",
+    "brandTitle": "Phòng điều khiển cho toàn bộ nền tảng của bạn.",
+    "brandSubtitle": "Người dùng, doanh thu và nội dung — một console nhanh, dày đặc, dựng trên cùng design system dùng chung.",
+    "brandPoints": [
+      "Phân quyền theo vai trò, đấu nối trọn vẹn",
+      "Bảng và thao tác sẵn sàng cho kiểm toán",
+      "Cùng bộ token với các app sản phẩm"
+    ]
+  },
+  "nav": {
+    "groupMain": "Chính",
+    "groupBusiness": "Kinh doanh",
+    "groupConfig": "Cấu hình",
+    "overview": "Tổng quan",
+    "analytics": "Phân tích",
+    "users": "Người dùng",
+    "projects": "Dự án",
+    "billing": "Thanh toán",
+    "subscriptions": "Gói đăng ký",
+    "settings": "Cài đặt",
+    "integrations": "Tích hợp"
+  },
+  "shell": {
+    "search": "Tìm dự án, người dùng…",
+    "notifications": "Thông báo",
+    "account": "Tài khoản",
+    "badge": "Quản trị",
+    "trialTitle": "Gói Pro",
+    "trialHint": "Bạn còn 14 ngày dùng thử.",
+    "upgrade": "Nâng cấp gói"
+  },
+  "overview": {
+    "title": "Tổng quan bảng điều khiển",
+    "subtitle": "Tổng quan thời gian thực về hiệu năng nền tảng và các chỉ số chính.",
+    "period": "so với 11/5 – 9/6",
+    "stats": {
+      "revenue": "Tổng doanh thu",
+      "users": "Người dùng hoạt động",
+      "conversion": "Tỷ lệ chuyển đổi",
+      "uptime": "Thời gian hoạt động"
+    },
+    "trends": "Xu hướng hiệu năng",
+    "trendsRevenue": "Doanh thu",
+    "trendsUsers": "Người dùng",
+    "revenueBySource": "Doanh thu theo nguồn",
+    "transactions": "Giao dịch gần đây",
+    "activity": "Hoạt động nhóm",
+    "viewAll": "Xem tất cả",
+    "cols": {
+      "id": "Mã",
+      "customer": "Khách hàng",
+      "plan": "Gói",
+      "amount": "Số tiền",
+      "date": "Ngày",
+      "status": "Trạng thái"
+    }
+  },
+  "users": {
+    "title": "Người dùng",
+    "subtitle": "Quản lý vận hành viên, thành viên và quyền truy cập.",
+    "add": "Thêm người dùng",
+    "search": "Tìm theo tên hoặc email…",
+    "filter": "Lọc",
+    "columns": {
+      "user": "Người dùng",
+      "role": "Vai trò",
+      "status": "Trạng thái",
+      "joined": "Tham gia",
+      "actions": "Thao tác"
+    },
+    "status": {
+      "active": "Hoạt động",
+      "invited": "Đã mời",
+      "suspended": "Đình chỉ"
+    },
+    "roles": {
+      "admin": "Quản trị",
+      "member": "Thành viên",
+      "viewer": "Người xem"
+    },
+    "showing": "Hiển thị {from}–{to} trên {total}",
+    "prev": "Trước",
+    "next": "Sau"
+  },
+  "stub": {
+    "badge": "Khung boilerplate",
+    "title": "Dựng {section} tại đây",
+    "subtitle": "Màn hình quản trị này cố tình để trống. Shell, xác thực và layout đã đấu nối sẵn — chỉ việc thêm tính năng của bạn.",
+    "back": "Về tổng quan"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "subtitle": "Quản lý hồ sơ vận hành và tuỳ chọn console của bạn.",
+    "profileTitle": "Hồ sơ vận hành",
+    "profileHint": "Thông tin này hiển thị trong nhật ký kiểm toán.",
+    "appearanceTitle": "Giao diện",
+    "appearanceHint": "Cá nhân hoá giao diện console trên thiết bị này.",
+    "themeLabel": "Chủ đề",
+    "themeHint": "Chuyển sáng/tối, hoặc theo hệ thống.",
+    "languageLabel": "Ngôn ngữ",
+    "languageHint": "Ngôn ngữ dùng trên toàn console.",
+    "save": "Lưu thay đổi",
+    "saved": "Đã lưu tuỳ chọn"
+  },
+  "meta": {
+    "title": "turbo/admin",
+    "template": "%s · turbo/admin",
+    "description": "Console quản trị — người dùng, nội dung và doanh thu trong một cái nhìn.",
+    "overview": "Tổng quan",
+    "users": "Người dùng",
+    "login": "Đăng nhập quản trị",
+    "register": "Tạo tài khoản vận hành",
+    "settings": "Cài đặt"
+  }
+}

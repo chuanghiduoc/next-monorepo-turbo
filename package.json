@@ -13,6 +13,7 @@
     "test:e2e": "turbo test:e2e",
     "codegen": "turbo codegen",
     "clean": "turbo clean && rm -rf node_modules",
+    "remove-app": "node scripts/remove-app.mjs",
     "prepare": "husky",
     "knip": "knip",
     "syncpack:check": "syncpack lint",

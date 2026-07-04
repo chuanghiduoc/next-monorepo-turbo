@@ -1,0 +1,110 @@
+{
+  "common": {
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "signingIn": "Đang đăng nhập…",
+    "signingOut": "Đang đăng xuất…",
+    "createAccount": "Tạo tài khoản",
+    "creating": "Đang tạo…",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "name": "Họ tên"
+  },
+  "auth": {
+    "loginTitle": "Chào mừng trở lại",
+    "loginSubtitle": "Đăng nhập vào workspace để tiếp tục.",
+    "registerTitle": "Tạo tài khoản của bạn",
+    "registerSubtitle": "Bắt đầu workspace miễn phí trong vài giây.",
+    "signInFailed": "Đăng nhập thất bại",
+    "signUpFailed": "Tạo tài khoản thất bại",
+    "accountCreated": "Đã tạo tài khoản",
+    "noAccount": "Chưa có tài khoản?",
+    "haveAccount": "Đã có tài khoản?",
+    "signUpLink": "Đăng ký",
+    "signInLink": "Đăng nhập",
+    "forgotPassword": "Quên mật khẩu?",
+    "orContinue": "hoặc tiếp tục với email",
+    "brandTitle": "Mọi thứ đấu nối sẵn. Không gì cản đường.",
+    "brandSubtitle": "Cùng một phiên hoạt động ở trình duyệt, server component và middleware — không cần lớp đấu nối.",
+    "brandPoints": [
+      "Xác thực bằng cookie, trọn vẹn",
+      "API client và hook có kiểu",
+      "Dark mode và i18n sẵn dùng"
+    ]
+  },
+  "nav": {
+    "groupMain": "Chính",
+    "groupResources": "Tài nguyên",
+    "overview": "Tổng quan",
+    "apps": "Ứng dụng",
+    "members": "Thành viên",
+    "billing": "Thanh toán",
+    "usage": "Sử dụng",
+    "settings": "Cài đặt",
+    "documentation": "Tài liệu",
+    "support": "Hỗ trợ"
+  },
+  "shell": {
+    "search": "Tìm mọi thứ…",
+    "notifications": "Thông báo",
+    "account": "Tài khoản",
+    "upgrade": "Quản lý gói",
+    "trialTitle": "Gói Pro",
+    "upgradeHint": "Bạn đang dùng gói Pro."
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "signedInAs": "Đang đăng nhập với {email}",
+    "session": "Phiên",
+    "greeting": "Chào mừng trở lại",
+    "subtitle": "Đây là những gì đang diễn ra trong workspace của bạn hôm nay.",
+    "newProject": "Dự án mới",
+    "stats": {
+      "requests": "Lượt gọi API",
+      "requestsHint": "24 giờ qua",
+      "users": "Người dùng hoạt động",
+      "usersHint": "so với tuần trước",
+      "latency": "Độ trễ trung bình",
+      "latencyHint": "phản hồi p95",
+      "uptime": "Thời gian hoạt động",
+      "uptimeHint": "30 ngày gần nhất"
+    },
+    "traffic": "Tổng quan lưu lượng",
+    "trafficHint": "Request proxy qua route API của Next",
+    "activity": "Hoạt động gần đây",
+    "viewAll": "Xem tất cả",
+    "sessionTitle": "Phiên của bạn",
+    "sessionHint": "Dữ liệu thô do getServerSession() trả về."
+  },
+  "stub": {
+    "badge": "Khung boilerplate",
+    "title": "Dựng {section} tại đây",
+    "subtitle": "Màn hình này cố tình để trống. Shell, xác thực và layout đã đấu nối sẵn — chỉ việc thêm tính năng của bạn.",
+    "back": "Về bảng điều khiển"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "subtitle": "Quản lý hồ sơ và tuỳ chọn workspace của bạn.",
+    "tabProfile": "Hồ sơ",
+    "tabAppearance": "Giao diện",
+    "profileTitle": "Hồ sơ",
+    "profileHint": "Thông tin này hiển thị cho đồng đội của bạn.",
+    "appearanceTitle": "Giao diện",
+    "appearanceHint": "Cá nhân hoá giao diện app trên thiết bị này.",
+    "themeLabel": "Chủ đề",
+    "themeHint": "Chuyển sáng/tối, hoặc theo hệ thống.",
+    "languageLabel": "Ngôn ngữ",
+    "languageHint": "Ngôn ngữ dùng trên toàn giao diện.",
+    "save": "Lưu thay đổi",
+    "saved": "Đã lưu tuỳ chọn"
+  },
+  "meta": {
+    "title": "turbo/app",
+    "template": "%s · turbo/app",
+    "description": "Workspace của bạn — bảng điều khiển, dự án, nhóm và cài đặt.",
+    "dashboard": "Bảng điều khiển",
+    "login": "Đăng nhập",
+    "register": "Tạo tài khoản",
+    "settings": "Cài đặt"
+  }
+}

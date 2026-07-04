@@ -1,0 +1,186 @@
+{
+  "common": {
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "signingIn": "Đang đăng nhập…",
+    "signingOut": "Đang đăng xuất…",
+    "createAccount": "Tạo tài khoản",
+    "creating": "Đang tạo…",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "name": "Họ tên"
+  },
+  "auth": {
+    "loginTitle": "Đăng nhập",
+    "loginSubtitle": "Dùng thông tin tài khoản để tiếp tục.",
+    "registerTitle": "Tạo tài khoản",
+    "registerSubtitle": "Bắt đầu workspace miễn phí.",
+    "signInFailed": "Đăng nhập thất bại",
+    "signUpFailed": "Tạo tài khoản thất bại",
+    "accountCreated": "Đã tạo tài khoản"
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "signedInAs": "Đang đăng nhập với {email}",
+    "session": "Phiên"
+  },
+  "validation": {
+    "emailInvalid": "Email không hợp lệ",
+    "passwordMin": "Tối thiểu 8 ký tự",
+    "nameMin": "Tối thiểu 2 ký tự"
+  },
+  "landing": {
+    "nav": {
+      "features": "Tính năng",
+      "stack": "Công nghệ",
+      "pricing": "Bảng giá",
+      "faq": "Hỏi đáp",
+      "signIn": "Đăng nhập",
+      "getStarted": "Bắt đầu"
+    },
+    "hero": {
+      "badge": "v0.0.1 · Next.js 16 + React 19",
+      "titleLead": "Viết phần",
+      "titleAccent": "keo dính",
+      "titleTail": "một lần. Tái dùng mãi mãi.",
+      "subtitle": "Bộ khởi tạo Turborepo cấp production với ba app đã đấu nối sẵn, UI dùng chung, API client có kiểu, xác thực, đa ngôn ngữ và kiểm thử — để ngày đầu tiên đã như ngày thứ một trăm.",
+      "ctaPrimary": "Bắt đầu ngay",
+      "ctaSecondary": "Xem tài liệu",
+      "note": "Giấy phép MIT · không khoá chân · clone là chạy"
+    },
+    "trust": "Những mảnh ghép đáng tin, đã lắp sẵn cho bạn",
+    "features": {
+      "eyebrow": "Mọi thứ đã đấu nối sẵn",
+      "title": "Những phần bạn phải viết lại ở mọi dự án",
+      "subtitle": "Không phải hello-world. Đây là lớp keo thực sự nói chuyện với backend.",
+      "items": [
+        {
+          "tag": "01",
+          "title": "Ba app, một hệ thống",
+          "desc": "Landing, app người dùng và trang quản trị dùng chung một gói UI, bộ token và dark mode. Bỏ app không cần bằng một câu lệnh."
+        },
+        {
+          "tag": "02",
+          "title": "Proxy API cùng origin",
+          "desc": "Trình duyệt gọi /api/*, Next chuyển tiếp tới backend. URL backend không bao giờ lọt vào bundle và CORS hết là vấn đề."
+        },
+        {
+          "tag": "03",
+          "title": "Xác thực bằng cookie, trọn vẹn",
+          "desc": "Better Auth hoạt động như nhau ở trình duyệt, server component, route handler và middleware. Không JWT rườm rà, không quay vòng refresh token."
+        },
+        {
+          "tag": "04",
+          "title": "API client có kiểu",
+          "desc": "Trỏ Orval vào OpenAPI spec để có hook React Query typed — hoặc tự viết tay. Cả hai cách cùng tồn tại."
+        },
+        {
+          "tag": "05",
+          "title": "i18n sống sót qua SSR",
+          "desc": "next-intl với segment locale, sẵn tiếng Việt và tiếng Anh, cùng bộ chuyển ngôn ngữ giữ nguyên vị trí trang."
+        },
+        {
+          "tag": "06",
+          "title": "Kiểm thử thật, CI thật",
+          "desc": "Vitest và Testing Library cho unit, Playwright trên ba trình duyệt cho E2E — tất cả chốt trong GitHub Actions."
+        }
+      ]
+    },
+    "showcase": {
+      "eyebrow": "Đầy đủ pin",
+      "title": "Nghiêm ở chỗ cần, lặng ở chỗ không",
+      "points": [
+        "TypeScript nghiêm ngặt với noUncheckedIndexedAccess",
+        "Husky + lint-staged + commitlint ở mỗi commit",
+        "Knip và Syncpack giữ đồ thị phụ thuộc trung thực",
+        "Docker standalone, chạy non-root, không phụ thuộc host"
+      ],
+      "codeCaption": "apps/app · cùng một phiên ở mọi nơi"
+    },
+    "pricing": {
+      "eyebrow": "Bảng giá",
+      "title": "Miễn phí để clone. Của bạn để ship.",
+      "subtitle": "Đây là boilerplate — các gói bên dưới đã đấu nối sẵn, chỉ chờ nhà cung cấp thanh toán của bạn.",
+      "mostPopular": "Phổ biến nhất",
+      "tiers": [
+        {
+          "name": "Starter",
+          "price": "0đ",
+          "desc": "Cho dự án phụ và bản mẫu.",
+          "features": [
+            "Một app",
+            "Hỗ trợ cộng đồng",
+            "Toàn bộ component UI",
+            "Giấy phép MIT"
+          ],
+          "cta": "Clone ngay"
+        },
+        {
+          "name": "Team",
+          "price": "690K",
+          "desc": "Cho đội ship lên production.",
+          "features": [
+            "Cả ba app",
+            "Auth + API client",
+            "Quy trình CI/CD",
+            "Ưu tiên xử lý issue"
+          ],
+          "cta": "Dùng thử miễn phí"
+        },
+        {
+          "name": "Scale",
+          "price": "Tuỳ chỉnh",
+          "desc": "Cho tổ chức nhiều bề mặt.",
+          "features": [
+            "Mọi thứ trong Team",
+            "SSO + hook kiểm toán",
+            "Rà soát design system",
+            "Hỗ trợ riêng"
+          ],
+          "cta": "Liên hệ chúng tôi"
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Hỏi đáp",
+      "title": "Giải đáp thắc mắc",
+      "items": [
+        {
+          "q": "Đây có thật sự sẵn sàng cho production?",
+          "a": "Có. Kiểu nghiêm ngặt, security header, kiểm thử và CI được đấu nối từ commit đầu tiên. Bạn thêm code sản phẩm, không phải lớp đấu nối."
+        },
+        {
+          "q": "Tôi có thể bỏ app không cần?",
+          "a": "Chạy pnpm remove-app <tên>. Nó xoá app và dọn mọi tham chiếu — knip, changeset và docker-compose."
+        },
+        {
+          "q": "Nó cần backend nào?",
+          "a": "Bất kỳ. Mọi lưu lượng client đều proxy qua Next tới BACKEND_URL, nên dùng REST hay GraphQL đều được — trình duyệt không thấy nó."
+        },
+        {
+          "q": "Bắt buộc phải dùng codegen API?",
+          "a": "Không. Orval là tuỳ chọn. Tự viết hook React Query hoặc sinh từ spec — cả hai cùng tồn tại."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Dự án tiếp theo của bạn khởi đầu ở ngày thứ một trăm.",
+      "subtitle": "Clone repo, trỏ vào backend, và ship thứ thực sự quan trọng.",
+      "button": "Bắt đầu ngay",
+      "secondary": "Star trên GitHub"
+    },
+    "footer": {
+      "tagline": "Bộ khởi tạo monorepo Next.js cấp production.",
+      "product": "Sản phẩm",
+      "resources": "Tài nguyên",
+      "legal": "Pháp lý",
+      "rights": "Phát hành theo giấy phép MIT.",
+      "builtWith": "Dựng bằng Next.js, Turborepo và sự lì lợm."
+    }
+  },
+  "meta": {
+    "title": "turbo/starter — Bộ khởi tạo monorepo Next.js cấp production",
+    "template": "%s · turbo/starter",
+    "description": "Bộ khởi tạo Turborepo cấp production với ba app đấu nối sẵn, UI dùng chung, API client có kiểu, xác thực, đa ngôn ngữ và kiểm thử. Clone là ship."
+  }
+}

@@ -77,7 +77,7 @@ If you've ever shipped a Next.js app that consumes a non-trivial backend, you've
 
 ## Highlights
 
-- **One Turborepo, three packages** — `apps/web` (Next.js), `@workspace/ui` (shadcn), `@workspace/api-client` (HTTP + hooks).
+- **One Turborepo, three apps + shared packages** — `apps/app` · `apps/landing` · `apps/admin` (Next.js) share `@workspace/ui` (shadcn) and `@workspace/api-client` (HTTP + hooks). Trim what you don't need with `pnpm remove-app <name>`.
 - **Same-origin proxy** — browser hits `/api/*`, Next forwards to `BACKEND_URL`. Backend URL is server-only env, never exposed to the bundle.
 - **Better Auth client + server helpers** — `useSession()` in the browser, `getServerSession()` in RSC, middleware guard for protected routes.
 - **TanStack Query + Devtools** — server + browser QueryClient with dehydration for streaming RSC.
@@ -132,7 +132,7 @@ If you've ever shipped a Next.js app that consumes a non-trivial backend, you've
                                    │ same-origin (cookie auto-attached)
                                    ▼
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                           apps/web (Next.js 16)                          │
+│                           apps/app (Next.js 16)                          │
 │                                                                          │
 │  middleware.ts        ← auth gate (session cookie) + i18n locale         │
 │  app/[locale]/...     ← App Router, RSC, Server Actions                  │
@@ -165,22 +165,24 @@ git clone https://github.com/chuanghiduoc/next-monorepo-turbo.git
 cd next-monorepo-turbo
 pnpm install
 
-# Copy env and point at your backend
-cp apps/web/.env.example apps/web/.env.local
-# edit apps/web/.env.local — BACKEND_URL=http://localhost:3000
+# Copy env and point at your backend (repeat per app you keep)
+cp apps/app/.env.example apps/app/.env.local
+# edit apps/app/.env.local — BACKEND_URL=http://localhost:4000
 
 pnpm dev
 ```
 
-Open <http://localhost:3000> — you'll be redirected to `/login`.
+`pnpm dev` runs every app in parallel on its own port.
 
-| Surface      | URL                                             |
-| ------------ | ----------------------------------------------- |
-| App          | <http://localhost:3000>                         |
-| API proxy    | <http://localhost:3000/api/*> → `BACKEND_URL/*` |
-| Vietnamese   | <http://localhost:3000/> (default locale)       |
-| English      | <http://localhost:3000/en>                      |
-| Locale-aware | `/dashboard` (vi) · `/en/dashboard` (en)        |
+| App / Surface | URL                                             |
+| ------------- | ----------------------------------------------- |
+| app (user)    | <http://localhost:3000>                         |
+| landing       | <http://localhost:3001>                         |
+| admin         | <http://localhost:3002>                         |
+| API proxy     | <http://localhost:3000/api/*> → `BACKEND_URL/*` |
+| Vietnamese    | <http://localhost:3000/> (default locale)       |
+| English       | <http://localhost:3000/en>                      |
+| Locale-aware  | `/dashboard` (vi) · `/en/dashboard` (en)        |
 
 ## Common Commands
 
@@ -194,9 +196,12 @@ pnpm test                           # vitest run (unit + integration)
 pnpm test:e2e                       # playwright (3 browsers — install first)
 
 # Single app / package
-pnpm --filter web dev               # next dev only
+pnpm --filter app dev               # next dev only (app | landing | admin)
 pnpm --filter @workspace/ui build   # build a single package
-pnpm --filter web exec playwright install   # one-time browser install
+pnpm --filter app exec playwright install   # one-time browser install
+
+# Boilerplate — drop an app you don't need (cleans knip / changeset / compose)
+pnpm remove-app landing             # or: admin, app
 
 # API codegen (consumes the live spec)
 pnpm codegen                                       # orval → packages/api-client/src/generated/
@@ -213,17 +218,21 @@ pnpm changeset:version              # bump versions, write changelog
 pnpm changeset:publish              # publish to npm (CI only)
 
 # Docker
-docker compose up -d --build web    # production build + run on :3000
-WEB_PORT=8080 docker compose up -d  # change exposed port (no rebuild required)
-docker compose down                 # stop and remove
+docker compose up -d --build app     # build + run one service (app | landing | admin)
+docker compose up -d --build         # build + run all three
+APP_PORT=8080 docker compose up -d   # change exposed port (no rebuild required)
+docker compose down                  # stop and remove
 ```
 
 ## Project Layout
 
 ```
 .
-├── apps/
-│   └── web/                          # Next.js 16 app
+├── apps/                            # three Next.js apps sharing the packages below
+│   ├── app/                         # user app (:3000) — full boilerplate
+│   ├── landing/                     # marketing site (:3001)
+│   └── admin/                       # admin panel (:3002)
+│       # every app has the same shape:
 │       ├── app/
 │       │   ├── [locale]/             # next-intl segment (vi default + en)
 │       │   │   ├── (auth)/           # login, register — public group
@@ -332,7 +341,7 @@ Better Auth is consumed entirely from the FE — the backend owns the auth surfa
 
 ## Internationalization
 
-`apps/web/i18n/` configures next-intl with `vi` as the default locale and `en` as the secondary.
+`apps/app/i18n/` configures next-intl with `vi` as the default locale and `en` as the secondary.
 
 ```
 /               → vi (no prefix, default)
@@ -341,41 +350,41 @@ Better Auth is consumed entirely from the FE — the backend owns the auth surfa
 /en/dashboard   → en dashboard
 ```
 
-`<LocaleSwitcher />` (`apps/web/components/locale-switcher.tsx`) preserves the current path when switching.
+`<LocaleSwitcher />` (`apps/app/components/locale-switcher.tsx`) preserves the current path when switching.
 
 Add a new locale:
 
-1. Append it to `routing.locales` in `apps/web/i18n/routing.ts`.
-2. Create `apps/web/messages/<locale>.json`.
+1. Append it to `routing.locales` in `apps/app/i18n/routing.ts`.
+2. Create `apps/app/messages/<locale>.json`.
 3. Add the label to `LABELS` in the switcher.
 
 ## Testing
 
 | Layer       | Tool                         | Where                              |
 | ----------- | ---------------------------- | ---------------------------------- |
-| Unit        | Vitest 4 + RTL + jsdom       | `apps/web/tests/unit/*.test.tsx`   |
+| Unit        | Vitest 4 + RTL + jsdom       | `apps/app/tests/unit/*.test.tsx`   |
 | Integration | Vitest + MSW                 | same — backend mocked via handlers |
-| E2E         | Playwright 1.60 (3 browsers) | `apps/web/tests/e2e/*.spec.ts`     |
+| E2E         | Playwright 1.60 (3 browsers) | `apps/app/tests/e2e/*.spec.ts`     |
 
 ```bash
 pnpm test                            # vitest run
-pnpm --filter web test:watch         # vitest watch
-pnpm --filter web test:coverage      # coverage report
+pnpm --filter app test:watch         # vitest watch
+pnpm --filter app test:coverage      # coverage report
 
-pnpm --filter web exec playwright install   # one-time
+pnpm --filter app exec playwright install   # one-time
 pnpm test:e2e                        # all browsers, headless
-pnpm --filter web test:e2e:ui        # interactive
+pnpm --filter app test:e2e:ui        # interactive
 ```
 
-MSW handlers live in `apps/web/tests/mocks/handlers.ts` and are shared between unit tests and the optional in-browser dev mode.
+MSW handlers live in `apps/app/tests/mocks/handlers.ts` and are shared between unit tests and the optional in-browser dev mode.
 
 ## Deployment
 
 The image is built with `output: "standalone"` — everything needed at runtime (minimal `node_modules`, the compiled server, static assets) is copied into a single layer.
 
 ```bash
-docker compose up -d --build web     # builds + serves :3000
-WEB_PORT=8080 docker compose up -d   # rebind without rebuilding
+docker compose up -d --build app     # builds + serves :3000 (app | landing | admin)
+APP_PORT=8080 docker compose up -d   # rebind without rebuilding
 ```
 
 The client bundle is **port-agnostic**: `axios` and `better-auth/react` resolve their base URLs against `window.location.origin` at runtime, so the same image deploys to any domain without a rebuild.

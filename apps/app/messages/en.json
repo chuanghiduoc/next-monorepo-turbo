@@ -1,0 +1,110 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signingIn": "Signing in…",
+    "signingOut": "Signing out…",
+    "createAccount": "Create account",
+    "creating": "Creating…",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name"
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to your workspace to continue.",
+    "registerTitle": "Create your account",
+    "registerSubtitle": "Start your free workspace in seconds.",
+    "signInFailed": "Sign-in failed",
+    "signUpFailed": "Sign-up failed",
+    "accountCreated": "Account created",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "orContinue": "or continue with email",
+    "brandTitle": "Everything wired. Nothing in your way.",
+    "brandSubtitle": "The same session works across the browser, server components and middleware — no plumbing required.",
+    "brandPoints": [
+      "Cookie-based auth, end to end",
+      "Typed API client and hooks",
+      "Dark mode and i18n out of the box"
+    ]
+  },
+  "nav": {
+    "groupMain": "Main",
+    "groupResources": "Resources",
+    "overview": "Overview",
+    "apps": "Apps",
+    "members": "Members",
+    "billing": "Billing",
+    "usage": "Usage",
+    "settings": "Settings",
+    "documentation": "Documentation",
+    "support": "Support"
+  },
+  "shell": {
+    "search": "Search anything…",
+    "notifications": "Notifications",
+    "account": "Account",
+    "upgrade": "Manage Plan",
+    "trialTitle": "Pro Plan",
+    "upgradeHint": "You are currently on the Pro plan."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "signedInAs": "Signed in as {email}",
+    "session": "Session",
+    "greeting": "Welcome back",
+    "subtitle": "Here's what's moving across your workspace today.",
+    "newProject": "New project",
+    "stats": {
+      "requests": "API requests",
+      "requestsHint": "last 24 hours",
+      "users": "Active users",
+      "usersHint": "vs. last week",
+      "latency": "Avg. latency",
+      "latencyHint": "p95 response",
+      "uptime": "Uptime",
+      "uptimeHint": "trailing 30 days"
+    },
+    "traffic": "Traffic overview",
+    "trafficHint": "Requests proxied through the Next API route",
+    "activity": "Recent activity",
+    "viewAll": "View all",
+    "sessionTitle": "Your session",
+    "sessionHint": "The raw payload returned by getServerSession()."
+  },
+  "stub": {
+    "badge": "Boilerplate stub",
+    "title": "Build {section} here",
+    "subtitle": "This screen ships empty on purpose. The shell, auth and layout are wired — drop your feature in and go.",
+    "back": "Back to dashboard"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your profile and workspace preferences.",
+    "tabProfile": "Profile",
+    "tabAppearance": "Appearance",
+    "profileTitle": "Profile",
+    "profileHint": "This information is shown to your teammates.",
+    "appearanceTitle": "Appearance",
+    "appearanceHint": "Personalize how the app looks on this device.",
+    "themeLabel": "Theme",
+    "themeHint": "Switch between light and dark, or follow your system.",
+    "languageLabel": "Language",
+    "languageHint": "The locale used across the interface.",
+    "save": "Save changes",
+    "saved": "Preferences saved"
+  },
+  "meta": {
+    "title": "turbo/app",
+    "template": "%s · turbo/app",
+    "description": "Your workspace — dashboard, projects, team and settings.",
+    "dashboard": "Dashboard",
+    "login": "Sign in",
+    "register": "Create account",
+    "settings": "Settings"
+  }
+}

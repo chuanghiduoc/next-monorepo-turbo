@@ -1,0 +1,140 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signingIn": "Signing in…",
+    "signingOut": "Signing out…",
+    "createAccount": "Create account",
+    "creating": "Creating…",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name"
+  },
+  "auth": {
+    "loginTitle": "Admin sign in",
+    "loginSubtitle": "Restricted area. Authorized operators only.",
+    "registerTitle": "Create operator account",
+    "registerSubtitle": "Provision a new admin operator.",
+    "signInFailed": "Sign-in failed",
+    "signUpFailed": "Sign-up failed",
+    "accountCreated": "Account created",
+    "noAccount": "Need an operator account?",
+    "haveAccount": "Already an operator?",
+    "signUpLink": "Request access",
+    "signInLink": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "orContinue": "or continue with email",
+    "brandTitle": "The control room for your whole platform.",
+    "brandSubtitle": "Users, revenue and content — one dense, fast console built on the same shared design system.",
+    "brandPoints": [
+      "Role-based access, wired end to end",
+      "Audit-ready tables and actions",
+      "The same tokens as your product apps"
+    ]
+  },
+  "nav": {
+    "groupMain": "Main",
+    "groupBusiness": "Business",
+    "groupConfig": "Configuration",
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "users": "Users",
+    "projects": "Projects",
+    "billing": "Billing",
+    "subscriptions": "Subscriptions",
+    "settings": "Settings",
+    "integrations": "Integrations"
+  },
+  "shell": {
+    "search": "Search for projects, users…",
+    "notifications": "Notifications",
+    "account": "Account",
+    "badge": "Admin",
+    "trialTitle": "Pro Plan",
+    "trialHint": "You have 14 days remaining in your trial.",
+    "upgrade": "Upgrade Plan"
+  },
+  "overview": {
+    "title": "Dashboard Overview",
+    "subtitle": "Real-time overview of your platform performance and key metrics.",
+    "period": "vs May 11 – Jun 9",
+    "stats": {
+      "revenue": "Total Revenue",
+      "users": "Active Users",
+      "conversion": "Conversion Rate",
+      "uptime": "System Uptime"
+    },
+    "trends": "Performance Trends",
+    "trendsRevenue": "Revenue",
+    "trendsUsers": "Users",
+    "revenueBySource": "Revenue by Source",
+    "transactions": "Recent Transactions",
+    "activity": "Team Activity",
+    "viewAll": "View All",
+    "cols": {
+      "id": "ID",
+      "customer": "Customer",
+      "plan": "Plan",
+      "amount": "Amount",
+      "date": "Date",
+      "status": "Status"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "subtitle": "Manage operators, members and their access.",
+    "add": "Add user",
+    "search": "Search by name or email…",
+    "filter": "Filter",
+    "columns": {
+      "user": "User",
+      "role": "Role",
+      "status": "Status",
+      "joined": "Joined",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "invited": "Invited",
+      "suspended": "Suspended"
+    },
+    "roles": {
+      "admin": "Admin",
+      "member": "Member",
+      "viewer": "Viewer"
+    },
+    "showing": "Showing {from}–{to} of {total}",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "stub": {
+    "badge": "Boilerplate stub",
+    "title": "Build {section} here",
+    "subtitle": "This admin screen ships empty on purpose. The shell, auth and layout are wired — drop your feature in and go.",
+    "back": "Back to overview"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your operator profile and console preferences.",
+    "profileTitle": "Operator profile",
+    "profileHint": "This information is shown in the audit log.",
+    "appearanceTitle": "Appearance",
+    "appearanceHint": "Personalize how the console looks on this device.",
+    "themeLabel": "Theme",
+    "themeHint": "Switch between light and dark, or follow your system.",
+    "languageLabel": "Language",
+    "languageHint": "The locale used across the console.",
+    "save": "Save changes",
+    "saved": "Preferences saved"
+  },
+  "meta": {
+    "title": "turbo/admin",
+    "template": "%s · turbo/admin",
+    "description": "Admin console — users, content and revenue at a glance.",
+    "overview": "Overview",
+    "users": "Users",
+    "login": "Admin sign in",
+    "register": "Create operator account",
+    "settings": "Settings"
+  }
+}

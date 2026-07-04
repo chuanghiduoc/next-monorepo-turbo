@@ -1,17 +1,69 @@
 services:
-  web:
+  app:
     build:
       context: .
-      dockerfile: apps/web/Dockerfile
+      dockerfile: apps/app/Dockerfile
       args:
-        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
-    image: next-monorepo-turbo/web:local
+        NEXT_PUBLIC_APP_URL: ${APP_URL:-http://localhost:3000}
+    image: next-monorepo-turbo/app:local
     restart: unless-stopped
     ports:
-      - "${WEB_PORT:-3000}:3000"
+      - "${APP_PORT:-3000}:3000"
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NEXT_PUBLIC_APP_URL: ${APP_URL:-http://localhost:3000}
+      BACKEND_URL: ${BACKEND_URL:-http://host.docker.internal:4000}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://localhost:3000/api/v1/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  landing:
+    build:
+      context: .
+      dockerfile: apps/landing/Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: ${LANDING_URL:-http://localhost:3001}
+    image: next-monorepo-turbo/landing:local
+    restart: unless-stopped
+    ports:
+      - "${LANDING_PORT:-3001}:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_APP_URL: ${LANDING_URL:-http://localhost:3001}
+      BACKEND_URL: ${BACKEND_URL:-http://host.docker.internal:4000}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://localhost:3000/api/v1/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  admin:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: ${ADMIN_URL:-http://localhost:3002}
+    image: next-monorepo-turbo/admin:local
+    restart: unless-stopped
+    ports:
+      - "${ADMIN_PORT:-3002}:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_APP_URL: ${ADMIN_URL:-http://localhost:3002}
       BACKEND_URL: ${BACKEND_URL:-http://host.docker.internal:4000}
       LOG_LEVEL: ${LOG_LEVEL:-info}
     healthcheck:

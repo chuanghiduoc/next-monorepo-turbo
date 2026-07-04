@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalEnv": ["NODE_ENV", "SKIP_ENV_VALIDATION"],
+  "globalEnv": ["NODE_ENV", "SKIP_ENV_VALIDATION", "PREVIEW_AUTH"],
   "globalPassThroughEnv": ["CI"],
   "tasks": {
     "build": {

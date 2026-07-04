@@ -19,4 +19,4 @@
 plans
 docs
 *.md
-!apps/web/README.md
+!apps/*/README.md

@@ -7,7 +7,33 @@
       "ignoreDependencies": ["lint-staged"],
       "ignoreBinaries": ["typecheck", "test"]
     },
-    "apps/web": {
+    "apps/app": {
+      "entry": [
+        "app/**/{page,layout,template,error,loading,not-found,route}.{ts,tsx}",
+        "tests/**/*.{test,spec}.{ts,tsx}",
+        "tests/e2e/**/*.spec.ts"
+      ],
+      "project": ["**/*.{ts,tsx}"],
+      "ignoreDependencies": [
+        "pino-pretty",
+        "@tailwindcss/postcss",
+        "@testing-library/user-event"
+      ]
+    },
+    "apps/landing": {
+      "entry": [
+        "app/**/{page,layout,template,error,loading,not-found,route}.{ts,tsx}",
+        "tests/**/*.{test,spec}.{ts,tsx}",
+        "tests/e2e/**/*.spec.ts"
+      ],
+      "project": ["**/*.{ts,tsx}"],
+      "ignoreDependencies": [
+        "pino-pretty",
+        "@tailwindcss/postcss",
+        "@testing-library/user-event"
+      ]
+    },
+    "apps/admin": {
       "entry": [
         "app/**/{page,layout,template,error,loading,not-found,route}.{ts,tsx}",
         "tests/**/*.{test,spec}.{ts,tsx}",

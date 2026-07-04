@@ -1,0 +1,186 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signingIn": "Signing in…",
+    "signingOut": "Signing out…",
+    "createAccount": "Create account",
+    "creating": "Creating…",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name"
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Use your account credentials to continue.",
+    "registerTitle": "Create account",
+    "registerSubtitle": "Start your free workspace.",
+    "signInFailed": "Sign-in failed",
+    "signUpFailed": "Sign-up failed",
+    "accountCreated": "Account created"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "signedInAs": "Signed in as {email}",
+    "session": "Session"
+  },
+  "validation": {
+    "emailInvalid": "Invalid email",
+    "passwordMin": "At least 8 characters",
+    "nameMin": "At least 2 characters"
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "stack": "Stack",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "signIn": "Sign in",
+      "getStarted": "Get started"
+    },
+    "hero": {
+      "badge": "v0.0.1 · Next.js 16 + React 19",
+      "titleLead": "Ship the boring",
+      "titleAccent": "glue",
+      "titleTail": "once. Reuse it forever.",
+      "subtitle": "A production-grade Turborepo starter with three wired apps, shared UI, a typed API client, auth, i18n and tests — so day one feels like day one hundred.",
+      "ctaPrimary": "Start building",
+      "ctaSecondary": "Read the docs",
+      "note": "MIT licensed · no lock-in · clone and go"
+    },
+    "trust": "Trusted primitives, assembled for you",
+    "features": {
+      "eyebrow": "Everything, already wired",
+      "title": "The parts you rewrite on every project",
+      "subtitle": "Not another hello-world. This is the glue that actually talks to a backend.",
+      "items": [
+        {
+          "tag": "01",
+          "title": "Three apps, one system",
+          "desc": "Landing, user app and admin panel share the same UI package, tokens and dark mode. Drop one you don't need with a single command."
+        },
+        {
+          "tag": "02",
+          "title": "Same-origin API proxy",
+          "desc": "The browser hits /api/*, Next forwards to your backend. The backend URL never reaches the bundle and CORS becomes a non-problem."
+        },
+        {
+          "tag": "03",
+          "title": "Cookie auth, end to end",
+          "desc": "Better Auth works the same in the browser, server components, route handlers and middleware. No JWT plumbing, no refresh dance."
+        },
+        {
+          "tag": "04",
+          "title": "Typed API client",
+          "desc": "Point Orval at your OpenAPI spec for typed React Query hooks — or write them by hand. Both modes live side by side."
+        },
+        {
+          "tag": "05",
+          "title": "i18n that survives SSR",
+          "desc": "next-intl with locale route segments, Vietnamese and English out of the box, and a switcher that keeps your place."
+        },
+        {
+          "tag": "06",
+          "title": "Real tests, real CI",
+          "desc": "Vitest and Testing Library for units, Playwright across three browsers for E2E — all gated in GitHub Actions."
+        }
+      ]
+    },
+    "showcase": {
+      "eyebrow": "Batteries included",
+      "title": "Strict where it counts, quiet where it doesn't",
+      "points": [
+        "Strict TypeScript with noUncheckedIndexedAccess",
+        "Husky + lint-staged + commitlint on every commit",
+        "Knip and Syncpack keep the graph honest",
+        "Standalone Docker image, non-root, host-agnostic"
+      ],
+      "codeCaption": "apps/app · the same session everywhere"
+    },
+    "pricing": {
+      "eyebrow": "Pricing",
+      "title": "Free to clone. Yours to ship.",
+      "subtitle": "It's a boilerplate — the tiers below are wired and waiting for your billing provider.",
+      "mostPopular": "Most popular",
+      "tiers": [
+        {
+          "name": "Starter",
+          "price": "$0",
+          "desc": "For side projects and prototypes.",
+          "features": [
+            "Single app",
+            "Community support",
+            "All UI components",
+            "MIT license"
+          ],
+          "cta": "Clone it"
+        },
+        {
+          "name": "Team",
+          "price": "$29",
+          "desc": "For teams shipping to production.",
+          "features": [
+            "All three apps",
+            "Auth + API client",
+            "CI/CD workflows",
+            "Priority issues"
+          ],
+          "cta": "Start free trial"
+        },
+        {
+          "name": "Scale",
+          "price": "Custom",
+          "desc": "For orgs with many surfaces.",
+          "features": [
+            "Everything in Team",
+            "SSO + audit hooks",
+            "Design system review",
+            "Dedicated support"
+          ],
+          "cta": "Talk to us"
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Questions, answered",
+      "items": [
+        {
+          "q": "Is this really production-ready?",
+          "a": "Yes. Strict types, security headers, tests and CI are wired from the first commit. You add product code, not plumbing."
+        },
+        {
+          "q": "Can I remove an app I don't need?",
+          "a": "Run pnpm remove-app <name>. It deletes the app and cleans every reference — knip, changeset and docker-compose."
+        },
+        {
+          "q": "Which backend does it expect?",
+          "a": "Any. All client traffic is proxied through Next to BACKEND_URL, so bring REST or GraphQL — the browser never sees it."
+        },
+        {
+          "q": "Do I have to use the API codegen?",
+          "a": "No. Orval is optional. Write React Query hooks by hand or generate them from a spec — both coexist."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Your next project starts at day one hundred.",
+      "subtitle": "Clone the repo, point it at your backend, and ship the thing that actually matters.",
+      "button": "Start building",
+      "secondary": "Star on GitHub"
+    },
+    "footer": {
+      "tagline": "A production-grade Next.js monorepo starter.",
+      "product": "Product",
+      "resources": "Resources",
+      "legal": "Legal",
+      "rights": "Released under the MIT license.",
+      "builtWith": "Built with Next.js, Turborepo and stubbornness."
+    }
+  },
+  "meta": {
+    "title": "turbo/starter — Production Next.js monorepo boilerplate",
+    "template": "%s · turbo/starter",
+    "description": "A production-grade Turborepo starter with three wired apps, shared UI, a typed API client, auth, i18n and tests. Clone it and ship."
+  }
+}
