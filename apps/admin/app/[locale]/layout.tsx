@@ -33,7 +33,9 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" })
 
   return {
-    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+    metadataBase: env.NEXT_PUBLIC_APP_URL
+      ? new URL(env.NEXT_PUBLIC_APP_URL)
+      : undefined,
     title: { default: t("title"), template: t("template") },
     description: t("description"),
     applicationName: "turbo/admin",

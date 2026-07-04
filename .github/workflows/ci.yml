@@ -13,6 +13,9 @@ env:
   TURBO_TELEMETRY_DISABLED: 1
   NEXT_TELEMETRY_DISABLED: 1
   SKIP_ENV_VALIDATION: 1
+  # Placeholder URLs so metadata/sitemap/robots resolve during the build.
+  NEXT_PUBLIC_APP_URL: http://localhost:3000
+  BACKEND_URL: http://localhost:4000
 
 jobs:
   verify:

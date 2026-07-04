@@ -6,14 +6,17 @@ test.describe("auth flow", () => {
   }) => {
     await page.goto("/dashboard")
     await expect(page).toHaveURL(/\/login(\?.*)?$/)
-    await expect(page.getByRole("heading", { name: /sign in/i })).toBeVisible()
+    // Locale-agnostic: the sign-in form (email field, labelled "Email" in both
+    // locales) is present after the redirect.
+    await expect(page.getByLabel("Email")).toBeVisible()
   })
 
   test("login form shows validation errors on empty submit", async ({
     page,
   }) => {
     await page.goto("/login")
-    await page.getByRole("button", { name: /sign in/i }).click()
-    await expect(page.getByText(/invalid email/i)).toBeVisible()
+    await page.locator('button[type="submit"]').click()
+    // react-hook-form marks the offending field aria-invalid — locale-agnostic.
+    await expect(page.locator('[aria-invalid="true"]').first()).toBeVisible()
   })
 })

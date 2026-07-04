@@ -29,7 +29,9 @@ export async function generateMetadata({
   const description = t("description")
 
   return {
-    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+    metadataBase: env.NEXT_PUBLIC_APP_URL
+      ? new URL(env.NEXT_PUBLIC_APP_URL)
+      : undefined,
     title: { default: title, template: t("template") },
     description,
     applicationName: "turbo/starter",
