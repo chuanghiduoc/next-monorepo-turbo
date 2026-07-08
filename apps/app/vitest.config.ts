@@ -13,15 +13,26 @@ export default defineConfig({
     setupFiles: ["./tests/setup.ts"],
     include: ["tests/unit/**/*.{test,spec}.{ts,tsx}"],
     coverage: {
+      provider: "v8",
       reporter: ["text", "html", "lcov"],
+      // Gate the pure-logic surface only; wiring and UI are covered by e2e.
+      // Thresholds are a ratchet — widen `include` and raise them as tests grow.
+      include: ["lib/validation/**/*.ts", "lib/stores/**/*.ts"],
       exclude: [
         "tests/**",
         ".next/**",
         "playwright.config.ts",
         "vitest.config.ts",
         "next.config.ts",
+        "instrumentation.ts",
         "**/*.d.ts",
       ],
+      thresholds: {
+        lines: 90,
+        functions: 90,
+        statements: 90,
+        branches: 80,
+      },
     },
   },
   resolve: {

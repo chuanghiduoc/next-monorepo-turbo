@@ -1,3 +1,5 @@
+// Runs on both client and server by design. The singleton is only assigned in
+// the browser branch; the server always gets a fresh client (no cross-request leak).
 import {
   QueryClient,
   defaultShouldDehydrateQuery,

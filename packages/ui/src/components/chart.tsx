@@ -81,6 +81,12 @@ function ChartContainer({
   )
 }
 
+// `key` and `color` are interpolated into a raw <style> tag — validate both to
+// prevent CSS/`</style>` injection if a consumer ever sources them from user data.
+const SAFE_CSS_IDENT = /^[a-zA-Z0-9_-]+$/
+const SAFE_CSS_COLOR =
+  /^(#[0-9a-fA-F]{3,8}|rgba?\([\d\s.,%/]+\)|hsla?\([\d\s.,%/deg]+\)|oklch\([\d\s.,%/]+\)|[a-zA-Z]+|var\(--[a-zA-Z0-9-]+\))$/
+
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([, config]) => config.theme ?? config.color
@@ -102,7 +108,9 @@ ${colorConfig
     const color =
       itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ??
       itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
+    if (!SAFE_CSS_IDENT.test(key)) return null
+    if (!color || !SAFE_CSS_COLOR.test(color.trim())) return null
+    return `  --color-${key}: ${color.trim()};`
   })
   .join("\n")}
 }

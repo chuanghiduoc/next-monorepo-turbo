@@ -1,19 +1,12 @@
 import axios, { type AxiosError, type AxiosRequestConfig } from "axios"
 
-/**
- * Browser → Next /api/* proxy → backend.
- * Server (RSC / route handlers) → backend directly via BACKEND_URL.
- *
- * Generated request paths (Orval / handwritten) MUST start with `/api/...`,
- * matching the backend swagger. The proxy route at `app/api/[...path]/route.ts`
- * forwards anything under `/api` to the backend.
- *
- * On the server, baseURL becomes absolute so axios can resolve URLs.
- */
+// Request paths MUST start with `/api/...`. In the browser baseURL is "" so
+// requests stay same-origin and hit the proxy route; on the server we target
+// BACKEND_URL directly to avoid a self-hop back through Next. No localhost
+// fallback — a missing BACKEND_URL on the server must fail loudly, not silently
+// hit the wrong host (it is validated at boot in instrumentation.ts).
 const isServer = typeof window === "undefined"
-const baseURL = isServer
-  ? (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000")
-  : ""
+const baseURL = isServer ? (process.env.BACKEND_URL ?? "") : ""
 
 export const apiClient = axios.create({
   baseURL,

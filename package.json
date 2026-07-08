@@ -10,6 +10,7 @@
     "format": "turbo format",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
+    "test:coverage": "turbo test:coverage",
     "test:e2e": "turbo test:e2e",
     "codegen": "turbo codegen",
     "clean": "turbo clean && rm -rf node_modules",

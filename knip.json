@@ -4,8 +4,7 @@
   "workspaces": {
     ".": {
       "project": ["*.{js,ts}"],
-      "ignoreDependencies": ["lint-staged"],
-      "ignoreBinaries": ["typecheck", "test"]
+      "ignoreDependencies": ["lint-staged"]
     },
     "apps/app": {
       "entry": [

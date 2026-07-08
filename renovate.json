@@ -19,6 +19,12 @@
       "automerge": true
     },
     {
+      "description": "Security-sensitive packages: require manual review, never automerge (supply-chain guard).",
+      "matchPackageNames": ["better-auth", "next", "zod", "@t3-oss/env-nextjs"],
+      "matchPackagePatterns": ["^@radix-ui/", "^radix-ui$"],
+      "automerge": false
+    },
+    {
       "matchPackagePatterns": ["^@types/"],
       "groupName": "type definitions",
       "automerge": true

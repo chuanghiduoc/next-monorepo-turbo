@@ -4,6 +4,7 @@ import { headers } from "next/headers"
 import { cache } from "react"
 
 import { env } from "@/lib/env"
+import { isPreviewAuth } from "@/lib/session-cookie"
 
 interface Session {
   user: {
@@ -42,7 +43,7 @@ const PREVIEW_SESSION: Session = {
  * backend round-trip instead of each re-fetching the session.
  */
 export const getServerSession = cache(async (): Promise<Session | null> => {
-  if (process.env.PREVIEW_AUTH === "1") return PREVIEW_SESSION
+  if (isPreviewAuth()) return PREVIEW_SESSION
 
   const cookie = (await headers()).get("cookie") ?? ""
 

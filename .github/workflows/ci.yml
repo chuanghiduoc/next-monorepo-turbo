@@ -18,42 +18,108 @@ env:
   BACKEND_URL: http://localhost:4000
 
 jobs:
-  verify:
-    name: lint • typecheck • test • build
+  lint:
+    name: lint • knip
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
       - name: Install
         run: pnpm install --frozen-lockfile
-
-      - name: Security audit (prod deps, block on high+)
-        run: pnpm audit --prod --audit-level high
-
       - name: Cache turbo
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+          key: turbo-lint-${{ github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            turbo-${{ github.job }}-${{ github.ref_name }}-
-            turbo-${{ github.job }}-
-
+            turbo-lint-${{ github.ref_name }}-
+            turbo-lint-
       - name: Lint
         run: pnpm lint
+      # Gate unused files/deps/exports. Binaries are excluded: knip misreads the
+      # husky hook scripts (`pnpm typecheck`/`test`) as unlisted binaries.
+      - name: Knip (unused files/deps/exports)
+        run: pnpm exec knip --exclude binaries
 
+  typecheck:
+    name: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Cache turbo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-typecheck-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            turbo-typecheck-${{ github.ref_name }}-
+            turbo-typecheck-
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Unit tests
-        run: pnpm test
+  test:
+    name: unit tests + coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Cache turbo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-test-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            turbo-test-${{ github.ref_name }}-
+            turbo-test-
+      - name: Unit tests with coverage
+        run: pnpm test:coverage
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: apps/*/coverage
+          if-no-files-found: ignore
+          retention-days: 7
 
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Security audit (prod deps, block on high+)
+        run: pnpm audit --prod --audit-level high
+      - name: Cache turbo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-build-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            turbo-build-${{ github.ref_name }}-
+            turbo-build-
       - name: Build
         run: pnpm build

@@ -2,6 +2,7 @@ import createMiddleware from "next-intl/middleware"
 import { NextResponse, type NextRequest } from "next/server"
 
 import { routing } from "@/i18n/routing"
+import { hasSessionCookie, isPreviewAuth } from "@/lib/session-cookie"
 
 const PUBLIC_PATHS = [
   "/login",
@@ -10,7 +11,6 @@ const PUBLIC_PATHS = [
   "/reset-password",
   "/preview",
 ]
-const SESSION_COOKIE_PREFIX = "better-auth"
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -28,19 +28,10 @@ function isPublic(pathname: string): boolean {
   return PUBLIC_PATHS.includes(path) || path === "/"
 }
 
-function hasSessionCookie(request: NextRequest): boolean {
-  return request.cookies
-    .getAll()
-    .some(
-      (c) =>
-        c.name.startsWith(SESSION_COOKIE_PREFIX) && c.name.includes("session")
-    )
-}
-
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
 
-  if (!isPublic(pathname) && !hasSessionCookie(request)) {
+  if (!isPreviewAuth() && !isPublic(pathname) && !hasSessionCookie(request)) {
     const url = request.nextUrl.clone()
     url.pathname = "/login"
     url.searchParams.set("next", pathname + search)

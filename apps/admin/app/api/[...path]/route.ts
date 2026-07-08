@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server"
 
 import { env } from "@/lib/env"
 import { logger } from "@/lib/logger"
+import { hasSessionCookie, isPreviewAuth } from "@/lib/session-cookie"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -18,6 +19,13 @@ const HOP_BY_HOP_HEADERS = new Set([
   "content-length",
   "host",
 ])
+
+// Reachable without a session — auth endpoints, or nobody could ever log in.
+const PUBLIC_API_PREFIXES = new Set(["auth"])
+
+function isPublicPath(segments: string[]): boolean {
+  return segments.length > 0 && PUBLIC_API_PREFIXES.has(segments[0]!)
+}
 
 function buildTargetUrl(request: NextRequest, segments: string[]): string {
   const path = segments.join("/")
@@ -36,7 +44,12 @@ function filterRequestHeaders(headers: Headers): Headers {
 function filterResponseHeaders(headers: Headers): Headers {
   const out = new Headers()
   headers.forEach((value, key) => {
-    if (!HOP_BY_HOP_HEADERS.has(key.toLowerCase())) out.append(key, value)
+    const lower = key.toLowerCase()
+    // Same-origin BFF: never relay the backend's CORS headers to the client.
+    if (HOP_BY_HOP_HEADERS.has(lower) || lower.startsWith("access-control-")) {
+      return
+    }
+    out.append(key, value)
   })
   return out
 }
@@ -46,9 +59,21 @@ async function proxy(
   context: { params: Promise<{ path: string[] }> }
 ): Promise<NextResponse> {
   const { path } = await context.params
+
+  // Same-origin requests need no cross-origin preflight; answer OPTIONS locally.
+  if (request.method === "OPTIONS") {
+    return new NextResponse(null, { status: 204 })
+  }
+
+  // Optimistic edge gate (no backend round-trip): reject requests with no session
+  // cookie so the proxy is not an open relay. The backend does the authoritative
+  // check. Public auth endpoints are exempt (audit C-01).
+  if (!isPublicPath(path) && !isPreviewAuth() && !hasSessionCookie(request)) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+  }
+
   const target = buildTargetUrl(request, path)
-  // Log only the sanitized upstream path — never the backend host or query
-  // string, which may carry internal topology and PII.
+  // Sanitized path only — never log the backend host or query string (PII).
   const logPath = `/api/${path.join("/")}`
 
   const method = request.method
