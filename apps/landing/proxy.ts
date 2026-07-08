@@ -8,12 +8,9 @@ const PUBLIC_PATHS = [
   "/register",
   "/forgot-password",
   "/reset-password",
+  "/preview",
 ]
 const SESSION_COOKIE_PREFIX = "better-auth"
-
-// Design-preview escape hatch: when PREVIEW_AUTH=1 every route is treated as
-// authenticated so protected pages render without a backend. Off by default.
-const PREVIEW_AUTH = process.env.PREVIEW_AUTH === "1"
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -40,10 +37,10 @@ function hasSessionCookie(request: NextRequest): boolean {
     )
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
 
-  if (!PREVIEW_AUTH && !isPublic(pathname) && !hasSessionCookie(request)) {
+  if (!isPublic(pathname) && !hasSessionCookie(request)) {
     const url = request.nextUrl.clone()
     url.pathname = "/login"
     url.searchParams.set("next", pathname + search)

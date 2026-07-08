@@ -40,7 +40,7 @@ function hasSessionCookie(request: NextRequest): boolean {
     )
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
 
   if (!PREVIEW_AUTH && !isPublic(pathname) && !hasSessionCookie(request)) {
