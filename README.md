@@ -64,7 +64,7 @@
 Most Next.js starters stop at "hello world + Tailwind". This one ships the parts you actually rewrite on every project that talks to an external backend:
 
 - **All client API traffic is proxied through Next** (`app/api/[...path]/route.ts`) so the backend URL never reaches the browser, cookies live on the FE origin, and CORS becomes a non-problem.
-- **Cookie-based Better Auth** wired end-to-end — same session works in browser, server components, route handlers, and middleware. No JWT, no refresh-token plumbing.
+- **Cookie-based Better Auth** wired end-to-end — same session works in browser, server components, route handlers, and the proxy (Next 16's `proxy.ts`). No JWT, no refresh-token plumbing.
 - **Codegen-friendly api-client package** — point Orval at the backend's OpenAPI spec for typed React Query hooks, or skip it entirely and write hooks by hand. Both modes coexist in `packages/api-client`.
 - **shadcn/ui in a separate workspace package** (`@workspace/ui`) — drop new components in once, consume from every app, no duplication.
 - **i18n that survives SSR** — next-intl with `[locale]` segments, `vi` default + `en`, locale switcher that preserves the current path.
@@ -79,7 +79,7 @@ If you've ever shipped a Next.js app that consumes a non-trivial backend, you've
 
 - **One Turborepo, three apps + shared packages** — `apps/app` · `apps/landing` · `apps/admin` (Next.js) share `@workspace/ui` (shadcn) and `@workspace/api-client` (HTTP + hooks). Trim what you don't need with `pnpm remove-app <name>`.
 - **Same-origin proxy** — browser hits `/api/*`, Next forwards to `BACKEND_URL`. Backend URL is server-only env, never exposed to the bundle.
-- **Better Auth client + server helpers** — `useSession()` in the browser, `getServerSession()` in RSC, middleware guard for protected routes.
+- **Better Auth client + server helpers** — `useSession()` in the browser, `getServerSession()` in RSC, `proxy.ts` guard for protected routes.
 - **TanStack Query + Devtools** — server + browser QueryClient with dehydration for streaming RSC.
 - **Type-safe env** — `@t3-oss/env-nextjs` + Zod, validated on boot, fails fast if anything is missing.
 - **Forms** — React Hook Form + Zod resolvers wrapped in shadcn `<Form />` components.
@@ -134,7 +134,7 @@ If you've ever shipped a Next.js app that consumes a non-trivial backend, you've
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                           apps/app (Next.js 16)                          │
 │                                                                          │
-│  middleware.ts        ← auth gate (session cookie) + i18n locale         │
+│  proxy.ts             ← auth gate (session cookie) + i18n locale         │
 │  app/[locale]/...     ← App Router, RSC, Server Actions                  │
 │  app/api/[...path]/   ← catch-all proxy → BACKEND_URL                    │
 │  lib/auth-server.ts   ← getServerSession() (RSC direct fetch)            │
@@ -249,7 +249,7 @@ docker compose down                  # stop and remove
 │       │   ├── stores/               # zustand stores
 │       │   └── validation/           # shared zod schemas
 │       ├── messages/                 # next-intl translations (vi, en)
-│       ├── middleware.ts             # auth + i18n
+│       ├── proxy.ts                  # auth + i18n (Next 16: was middleware.ts)
 │       ├── tests/
 │       │   ├── unit/                 # vitest + RTL + MSW
 │       │   ├── e2e/                  # playwright
@@ -330,12 +330,12 @@ The two modes share the same axios instance, error type, and cancellation behavi
 
 Better Auth is consumed entirely from the FE — the backend owns the auth surface:
 
-| Where          | What                                           |
-| -------------- | ---------------------------------------------- |
-| Browser        | `authClient.signIn.email()` etc.               |
-| RSC / layout   | `await getServerSession()` in `auth-server.ts` |
-| Route handlers | Same `getServerSession()` (server-only)        |
-| Middleware     | Cookie presence check, redirect to `/login`    |
+| Where              | What                                           |
+| ------------------ | ---------------------------------------------- |
+| Browser            | `authClient.signIn.email()` etc.               |
+| RSC / layout       | `await getServerSession()` in `auth-server.ts` |
+| Route handlers     | Same `getServerSession()` (server-only)        |
+| Proxy (`proxy.ts`) | Cookie presence check, redirect to `/login`    |
 
 `authClient` uses `window.location.origin` at runtime so the same Docker image works on any host/port. The server helper hits the backend directly (skips the proxy) with the inbound `Cookie` header forwarded.
 

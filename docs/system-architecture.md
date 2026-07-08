@@ -5,30 +5,32 @@ lives, and **when to reach for which tool**. Read this before adding a feature,
 a page, or a new app.
 
 > Companion docs: [`code-standards.md`](./code-standards.md) (conventions &
-> quality gates). Product overview lives in the root [`README.md`](../README.md).
+> quality gates) · [`guides/`](./guides/README.md) (how-to per library: data
+> fetching, forms, auth, state, env, i18n, testing, logging). Product overview
+> lives in the root [`README.md`](../README.md).
 
 ---
 
 ## 1. Tech stack
 
-| Layer         | Choice                                                            | Why / notes                                                  |
-| ------------- | ----------------------------------------------------------------- | ------------------------------------------------------------ |
-| Monorepo      | **Turborepo** + **pnpm workspaces**                               | Task graph + caching; `apps/*`, `packages/*`.                |
-| Framework     | **Next.js 16** (App Router, RSC, Turbopack)                       | Server Components by default.                                |
-| UI runtime    | **React 19**                                                      | Server + client components, `use` / Suspense.                |
-| Language      | **TypeScript 5.9** (strict)                                       | `noUncheckedIndexedAccess`, `noImplicitOverride`.            |
-| Styling       | **Tailwind CSS v4** (`@theme`, oklch tokens)                      | No config file — theme lives in `packages/ui`.               |
-| Components    | **shadcn/ui** in `@workspace/ui`                                  | ~60 primitives, customized once, shared by all apps.         |
-| Icons         | **lucide-react**                                                  | No brand/logo icons — use generic ones.                      |
-| Charts        | **recharts 3** via `@workspace/ui/components/chart`               | `ChartContainer` + `ChartConfig`.                            |
-| Auth          | **Better Auth** (cookie sessions)                                 | Same session in browser / RSC / route handlers / middleware. |
-| Data fetching | **TanStack Query** + typed **api-client**                         | Orval-generated hooks optional; all traffic proxied.         |
-| i18n          | **next-intl** (`vi` default, `en`)                                | `[locale]` segment + `messages/*.json`.                      |
-| Forms         | **React Hook Form** + **Zod**                                     | Validation at the boundary.                                  |
-| State         | **Zustand** (persist + SSR hydration)                             | Local UI state only.                                         |
-| Logging       | **Pino** (server only, redacted)                                  | Never import into client code.                               |
-| Tests         | **Vitest** + RTL + MSW (unit), **Playwright** (e2e)               | Gated in CI.                                                 |
-| Tooling       | ESLint 9, Prettier, Husky, Commitlint, Knip, Syncpack, Changesets | Enforced pre-commit + CI.                                    |
+| Layer         | Choice                                                            | Why / notes                                             |
+| ------------- | ----------------------------------------------------------------- | ------------------------------------------------------- |
+| Monorepo      | **Turborepo** + **pnpm workspaces**                               | Task graph + caching; `apps/*`, `packages/*`.           |
+| Framework     | **Next.js 16** (App Router, RSC, Turbopack)                       | Server Components by default.                           |
+| UI runtime    | **React 19**                                                      | Server + client components, `use` / Suspense.           |
+| Language      | **TypeScript 5.9** (strict)                                       | `noUncheckedIndexedAccess`, `noImplicitOverride`.       |
+| Styling       | **Tailwind CSS v4** (`@theme`, oklch tokens)                      | No config file — theme lives in `packages/ui`.          |
+| Components    | **shadcn/ui** in `@workspace/ui`                                  | ~60 primitives, customized once, shared by all apps.    |
+| Icons         | **lucide-react**                                                  | No brand/logo icons — use generic ones.                 |
+| Charts        | **recharts 3** via `@workspace/ui/components/chart`               | `ChartContainer` + `ChartConfig`.                       |
+| Auth          | **Better Auth** (cookie sessions)                                 | Same session in browser / RSC / route handlers / proxy. |
+| Data fetching | **TanStack Query** + typed **api-client**                         | Orval-generated hooks optional; all traffic proxied.    |
+| i18n          | **next-intl** (`vi` default, `en`)                                | `[locale]` segment + `messages/*.json`.                 |
+| Forms         | **React Hook Form** + **Zod**                                     | Validation at the boundary.                             |
+| State         | **Zustand** (persist + SSR hydration)                             | Local UI state only.                                    |
+| Logging       | **Pino** (server only, redacted)                                  | Never import into client code.                          |
+| Tests         | **Vitest** + RTL + MSW (unit), **Playwright** (e2e)               | Gated in CI.                                            |
+| Tooling       | ESLint 9, Prettier, Husky, Commitlint, Knip, Syncpack, Changesets | Enforced pre-commit + CI.                               |
 
 ---
 
@@ -86,7 +88,7 @@ apps/<app>/
 ├── lib/                        # auth-server, auth-client, env, logger, query-client, validation, stores
 ├── i18n/                       # routing.ts, navigation.ts, request.ts
 ├── messages/                   # en.json, vi.json
-├── middleware.ts               # i18n + auth-cookie gate (+ PREVIEW_AUTH escape hatch)
+├── proxy.ts                    # i18n + auth-cookie gate (+ PREVIEW_AUTH escape hatch) — Next 16 renamed `middleware.ts` → `proxy.ts`
 └── next.config.ts
 ```
 
@@ -133,9 +135,9 @@ RSC ──────────── getServerSession() ──────�
 - **Auth** is cookie-based (Better Auth). Read the session:
   - Server: `getServerSession()` from `@/lib/auth-server` (React-cached).
   - Client: `useSession()` from `@/lib/auth-client`.
-  - Middleware: checks the session cookie to gate protected paths.
+  - Proxy (`proxy.ts`): checks the session cookie to gate protected paths.
 - **Preview mode** — `PREVIEW_AUTH=1` (dev-only, in `.env.local`) makes
-  `getServerSession()` return a mock user and the middleware skip the redirect,
+  `getServerSession()` return a mock user and the proxy skip the redirect,
   so you can browse protected pages without a backend. Declared in
   `turbo.json → globalEnv`. Off by default; never set in production.
 
