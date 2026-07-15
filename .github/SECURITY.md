@@ -21,13 +21,13 @@ Cam kết phản hồi trong vòng 48 giờ và cập nhật tiến độ mỗi 
 
 Repo được bảo vệ bởi các lớp tự động sau:
 
-| Lớp                    | Công cụ      | Cấu hình                                 |
-| ---------------------- | ------------ | ---------------------------------------- |
-| Dependency alerts      | Dependabot   | `.github/dependabot.yml` (security-only) |
-| Dependency updates     | Renovate     | `renovate.json`                          |
-| Static analysis (SAST) | CodeQL       | `.github/workflows/codeql.yml`           |
-| Secret scanning        | Gitleaks     | `.github/workflows/gitleaks.yml`         |
-| Audit gate             | `pnpm audit` | Chạy trong CI                            |
+| Lớp                    | Công cụ     | Cấu hình                                          |
+| ---------------------- | ----------- | ------------------------------------------------- |
+| Dependency alerts      | Dependabot  | `.github/dependabot.yml` (security-only)          |
+| Dependency updates     | Renovate    | `renovate.json`                                   |
+| Static analysis (SAST) | CodeQL      | `.github/workflows/codeql.yml`                    |
+| Secret scanning        | Gitleaks    | `.github/workflows/gitleaks.yml`                  |
+| Audit gate             | osv-scanner | `.github/workflows/ci.yml` (job `security-audit`) |
 
 ## Kích hoạt (yêu cầu quyền admin repo)
 
