@@ -2,23 +2,14 @@ import { NextResponse, type NextRequest } from "next/server"
 
 import { env } from "@/lib/env"
 import { logger } from "@/lib/logger"
+import {
+  filterRequestHeaders,
+  filterResponseHeaders,
+} from "@/lib/proxy-headers"
 import { hasSessionCookie, isPreviewAuth } from "@/lib/session-cookie"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
-
-const HOP_BY_HOP_HEADERS = new Set([
-  "connection",
-  "keep-alive",
-  "proxy-authenticate",
-  "proxy-authorization",
-  "te",
-  "trailers",
-  "transfer-encoding",
-  "upgrade",
-  "content-length",
-  "host",
-])
 
 // Reachable without a session — auth endpoints, or nobody could ever log in.
 const PUBLIC_API_PREFIXES = new Set(["auth"])
@@ -31,27 +22,6 @@ function buildTargetUrl(request: NextRequest, segments: string[]): string {
   const path = segments.join("/")
   const search = request.nextUrl.search
   return `${env.BACKEND_URL}/api/${path}${search}`
-}
-
-function filterRequestHeaders(headers: Headers): Headers {
-  const out = new Headers()
-  headers.forEach((value, key) => {
-    if (!HOP_BY_HOP_HEADERS.has(key.toLowerCase())) out.set(key, value)
-  })
-  return out
-}
-
-function filterResponseHeaders(headers: Headers): Headers {
-  const out = new Headers()
-  headers.forEach((value, key) => {
-    const lower = key.toLowerCase()
-    // Same-origin BFF: never relay the backend's CORS headers to the client.
-    if (HOP_BY_HOP_HEADERS.has(lower) || lower.startsWith("access-control-")) {
-      return
-    }
-    out.append(key, value)
-  })
-  return out
 }
 
 async function proxy(
