@@ -7,7 +7,7 @@ import { env } from "@/lib/env"
 const isDev = env.NODE_ENV === "development"
 
 export const logger = pino({
-  level: env.LOG_LEVEL ?? "info",
+  level: env.LOG_LEVEL,
   base: { service: "app" },
   redact: {
     paths: [
