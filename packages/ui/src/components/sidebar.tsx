@@ -580,6 +580,25 @@ function SidebarMenuBadge({
   )
 }
 
+const SKELETON_WIDTH_MIN_PERCENT = 50
+const SKELETON_WIDTH_RANGE_PERCENT = 40
+
+/**
+ * Varied but deterministic bar width in the 50–90% band.
+ *
+ * `Math.random()` would produce a different value on the server than during
+ * hydration and trip a mismatch on the inline style, so the width is derived
+ * from React's per-instance id, which is stable across both renders.
+ */
+function skeletonWidthFromId(id: string): string {
+  let hash = 0
+  for (let index = 0; index < id.length; index++) {
+    hash =
+      (hash + id.charCodeAt(index) * (index + 1)) % SKELETON_WIDTH_RANGE_PERCENT
+  }
+  return `${SKELETON_WIDTH_MIN_PERCENT + hash}%`
+}
+
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -587,10 +606,7 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean
 }) {
-  // Random width between 50 to 90%.
-  const [width] = React.useState(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
-  })
+  const width = skeletonWidthFromId(React.useId())
 
   return (
     <div
