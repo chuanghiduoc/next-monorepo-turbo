@@ -17,25 +17,10 @@ import {
 } from "@workspace/ui/components/form"
 import { Input } from "@workspace/ui/components/input"
 
-import { signIn } from "@/lib/auth-client"
-import { loginSchema, type LoginInput } from "@/lib/validation/auth"
 import { useRouter } from "@/i18n/navigation"
-
-/**
- * Only allow same-origin, non-protocol-relative paths as a post-login target,
- * otherwise `?next=https://evil.com` / `?next=//evil.com` becomes an open redirect.
- */
-function getSafeNext(raw: string | null): string {
-  if (
-    raw &&
-    raw.startsWith("/") &&
-    !raw.startsWith("//") &&
-    !raw.startsWith("/\\")
-  ) {
-    return raw
-  }
-  return "/dashboard"
-}
+import { signIn } from "@/lib/auth-client"
+import { getSafeNext } from "@/lib/locale-path"
+import { loginSchema, type LoginInput } from "@/lib/validation/auth"
 
 function LoginForm() {
   const t = useTranslations()

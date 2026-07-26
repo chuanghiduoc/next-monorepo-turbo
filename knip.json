@@ -3,8 +3,7 @@
   "ignoreUnresolved": ["next"],
   "workspaces": {
     ".": {
-      "project": ["*.{js,ts}"],
-      "ignoreDependencies": ["lint-staged"]
+      "project": ["*.{js,ts}"]
     },
     "apps/app": {
       "entry": [
@@ -51,8 +50,7 @@
     },
     "packages/api-client": {
       "entry": ["orval.config.ts"],
-      "project": ["src/**/*.ts"],
-      "ignore": ["src/generated/**"]
+      "project": ["src/**/*.ts"]
     }
   }
 }

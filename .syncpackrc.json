@@ -22,6 +22,12 @@
   ],
   "semverGroups": [
     {
+      "label": "peer ranges stay permissive",
+      "dependencyTypes": ["peer"],
+      "dependencies": ["**"],
+      "range": "^"
+    },
+    {
       "label": "exact pin types and devtools",
       "dependencies": ["typescript", "turbo", "next", "react", "react-dom"],
       "range": ""

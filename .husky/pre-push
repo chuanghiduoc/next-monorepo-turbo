@@ -1,1 +1,12 @@
-pnpm test
+set -e
+
+# Same gate as the CI workflow, in the same order, so a push that passes here
+# does not come back red. Turbo caches lint/typecheck from pre-commit, so the
+# real cost is the build. Coverage (not plain `test`) because CI enforces the
+# coverage thresholds.
+pnpm lint
+pnpm typecheck
+pnpm test:coverage
+pnpm build
+pnpm exec knip --exclude binaries
+pnpm syncpack:check

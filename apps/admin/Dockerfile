@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20-alpine
+ARG NODE_VERSION=24-alpine
 
 # ---------- Stage 1: prune monorepo to admin subset ----------
 FROM node:${NODE_VERSION} AS pruner

@@ -34,22 +34,16 @@ apiClient.interceptors.response.use(
   }
 )
 
+/**
+ * Orval mutator. Cancellation rides on the `AbortSignal` React Query passes
+ * into `queryFn` and Orval forwards in `config.signal` — the deprecated
+ * `CancelToken` plus a `.cancel()` property on the promise is the React Query
+ * v3 protocol and is ignored by v5.
+ */
 export const customAxiosInstance = <T>(
   config: AxiosRequestConfig,
   options?: AxiosRequestConfig
-): Promise<T> => {
-  const source = axios.CancelToken.source()
-  const promise = apiClient({
-    ...config,
-    ...options,
-    cancelToken: source.token,
-  }).then(({ data }) => data as T)
-
-  ;(promise as Promise<T> & { cancel?: () => void }).cancel = () => {
-    source.cancel("Query was cancelled")
-  }
-
-  return promise
-}
+): Promise<T> =>
+  apiClient({ ...config, ...options }).then(({ data }) => data as T)
 
 export type ApiError<T = { message?: string; code?: string }> = AxiosError<T>
