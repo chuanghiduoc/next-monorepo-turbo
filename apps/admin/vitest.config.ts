@@ -17,7 +17,13 @@ export default defineConfig({
       reporter: ["text", "html", "lcov"],
       // Gate the pure-logic surface only; wiring and UI are covered by e2e.
       // Thresholds are a ratchet — widen `include` and raise them as tests grow.
-      include: ["lib/validation/**/*.ts", "lib/stores/**/*.ts"],
+      include: [
+        "lib/validation/**/*.ts",
+        "lib/stores/**/*.ts",
+        "lib/locale-path.ts",
+        "lib/proxy-headers.ts",
+        "lib/session-cookie.ts",
+      ],
       exclude: [
         "tests/**",
         ".next/**",

@@ -121,6 +121,21 @@ describe("filterResponseHeaders", () => {
       "session=xyz"
     )
   })
+
+  // Sign-in sets several cookies at once; collapsing them into one comma-joined
+  // value would make the browser drop every cookie but the first.
+  it("keeps multiple Set-Cookie headers separate", () => {
+    const input = new Headers()
+    input.append("set-cookie", "session=xyz; HttpOnly; Path=/")
+    input.append("set-cookie", "remember=1; Path=/")
+
+    const out = filterResponseHeaders(input)
+
+    expect(out.getSetCookie()).toEqual([
+      "session=xyz; HttpOnly; Path=/",
+      "remember=1; Path=/",
+    ])
+  })
 })
 
 describe("HOP_BY_HOP_HEADERS", () => {
