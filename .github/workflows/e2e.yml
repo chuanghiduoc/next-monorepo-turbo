@@ -20,13 +20,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
@@ -34,15 +34,18 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm --filter app exec playwright install --with-deps
 
+      # Through turbo, not `pnpm --filter`: the `test:e2e` task depends on
+      # `build`, and Playwright now boots the production server (`next start`).
+      # Calling the package script directly would skip the build.
       - name: Run E2E
         env:
           NEXT_PUBLIC_APP_URL: http://localhost:3000
           BACKEND_URL: http://localhost:4000
-        run: pnpm --filter app test:e2e
+        run: pnpm exec turbo run test:e2e --filter=app
 
       - name: Upload report
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: apps/app/playwright-report

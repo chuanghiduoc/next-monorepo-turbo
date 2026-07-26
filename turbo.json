@@ -25,7 +25,6 @@
       "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"]
     },
     "test": {
-      "outputs": ["coverage/**"],
       "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"]
     },
     "test:coverage": {
@@ -33,7 +32,9 @@
       "env": ["NEXT_PUBLIC_APP_URL", "BACKEND_URL", "LOG_LEVEL"]
     },
     "test:e2e": {
-      "dependsOn": ["^build"],
+      // `build`, not `^build`: Playwright starts this app's production server,
+      // so the app itself must be built — `^build` only covers its dependencies.
+      "dependsOn": ["build"],
       "cache": false,
       "env": [
         "NEXT_PUBLIC_APP_URL",
