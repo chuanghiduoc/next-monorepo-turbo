@@ -6,8 +6,13 @@ import { env } from "@/lib/env"
 
 const isDev = env.NODE_ENV === "development"
 
+// The `?? "info"` is load-bearing, not redundant with the Zod default: builds
+// run with SKIP_ENV_VALIDATION=1 (Docker, CI), and skipping validation also
+// skips the schema defaults, so LOG_LEVEL arrives undefined. pino then throws
+// "default level:undefined must be included in custom levels" at import time
+// and the build fails while collecting page data.
 export const logger = pino({
-  level: env.LOG_LEVEL,
+  level: env.LOG_LEVEL ?? "info",
   base: { service: "admin" },
   redact: {
     paths: [
