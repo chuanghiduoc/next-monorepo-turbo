@@ -1,2 +1,9 @@
+set -e
+
+# Format staged files, then run the real lint through `turbo lint` so every
+# workspace is checked with its own flat config. ESLint 9 does not cascade
+# configs by directory, so invoking eslint on staged paths from the repo root
+# would apply the weaker root ruleset instead of the Next.js/React one.
 pnpm exec lint-staged
+pnpm lint
 pnpm typecheck

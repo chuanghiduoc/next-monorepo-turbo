@@ -34,19 +34,19 @@ jobs:
       fail-on-vuln: true
 
   lint:
-    name: lint • knip
+    name: lint • knip • syncpack
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Cache turbo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .turbo
           key: turbo-lint-${{ github.ref_name }}-${{ github.sha }}
@@ -59,21 +59,25 @@ jobs:
       # husky hook scripts (`pnpm typecheck`/`test`) as unlisted binaries.
       - name: Knip (unused files/deps/exports)
         run: pnpm exec knip --exclude binaries
+      # Mirrors the pre-push hook: a version drift that fails locally must fail
+      # here too, otherwise the two gates disagree.
+      - name: Syncpack (dependency version consistency)
+        run: pnpm syncpack:check
 
   typecheck:
     name: typecheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Cache turbo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .turbo
           key: turbo-typecheck-${{ github.ref_name }}-${{ github.sha }}
@@ -87,16 +91,16 @@ jobs:
     name: unit tests + coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Cache turbo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .turbo
           key: turbo-test-${{ github.ref_name }}-${{ github.sha }}
@@ -107,7 +111,7 @@ jobs:
         run: pnpm test:coverage
       - name: Upload coverage
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: apps/*/coverage
@@ -118,16 +122,16 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile
       - name: Cache turbo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .turbo
           key: turbo-build-${{ github.ref_name }}-${{ github.sha }}
