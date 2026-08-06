@@ -1,12 +1,19 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
+
 import { Button } from "@workspace/ui/components/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card"
 import {
   Form,
   FormControl,
@@ -46,97 +53,85 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-2">
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">
-          {t("auth.registerTitle")}
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          {t("auth.registerSubtitle")}
+    <Card className="rounded-lg">
+      <CardHeader>
+        <CardTitle>
+          <h1>{t("auth.registerTitle")}</h1>
+        </CardTitle>
+        <CardDescription>{t("auth.registerSubtitle")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("common.name")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete="name"
+                      placeholder="Ada Lovelace"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("common.email")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@company.com"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("common.password")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      autoComplete="new-password"
+                      placeholder="At least 8 characters"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" disabled={submitting} className="w-full">
+              {submitting ? t("common.creating") : t("common.createAccount")}
+            </Button>
+          </form>
+        </Form>
+
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          {t("auth.haveAccount")}{" "}
+          <Link href="/login" className="font-medium text-foreground">
+            {t("auth.signInLink")}
+          </Link>
         </p>
-      </div>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("common.name")}</FormLabel>
-                <FormControl>
-                  <Input
-                    autoComplete="name"
-                    placeholder="Ada Lovelace"
-                    className="h-11"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("common.email")}</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@company.com"
-                    className="h-11"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("common.password")}</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    autoComplete="new-password"
-                    placeholder="At least 8 characters"
-                    className="h-11"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button
-            type="submit"
-            disabled={submitting}
-            className="h-11 w-full text-base shadow-sm"
-          >
-            {submitting ? t("common.creating") : t("common.createAccount")}
-            {!submitting && <ArrowRight className="size-4" />}
-          </Button>
-        </form>
-      </Form>
-
-      <p className="text-center text-sm text-muted-foreground">
-        {t("auth.haveAccount")}{" "}
-        <Link
-          href="/login"
-          className="font-medium text-foreground underline-offset-4 hover:underline"
-        >
-          {t("auth.signInLink")}
-        </Link>
-      </p>
-    </div>
+      </CardContent>
+    </Card>
   )
 }

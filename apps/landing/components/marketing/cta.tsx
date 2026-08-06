@@ -9,28 +9,19 @@ export async function Cta() {
 
   return (
     <section className="px-5 py-24 sm:px-8 sm:py-28">
-      <div className="grain relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-foreground px-6 py-16 text-center text-background sm:px-16 sm:py-20">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand/30 blur-[100px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-brand/20 blur-[100px]"
-        />
-
-        <h2 className="relative mx-auto max-w-3xl font-heading text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
+      <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-foreground px-6 py-16 text-center text-background sm:px-16 sm:py-20">
+        <h2 className="mx-auto max-w-3xl font-heading text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
           {t("title")}
         </h2>
-        <p className="relative mx-auto mt-5 max-w-xl text-lg text-balance text-background/70">
+        <p className="mx-auto mt-5 max-w-xl text-lg text-balance text-background/70">
           {t("subtitle")}
         </p>
 
-        <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button
             asChild
             size="lg"
-            className="h-12 bg-brand px-7 text-base text-brand-foreground shadow-lg hover:bg-brand/90"
+            className="h-12 bg-brand px-7 text-base text-brand-foreground hover:bg-brand/80"
           >
             <a href={appHref("/register")}>
               {t("button")}

@@ -3,7 +3,8 @@
   "ignoreUnresolved": ["next"],
   "workspaces": {
     ".": {
-      "project": ["*.{js,ts}"]
+      "project": ["*.{js,ts}"],
+      "ignoreDependencies": ["lint-staged"]
     },
     "apps/app": {
       "entry": [

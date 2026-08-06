@@ -13,8 +13,10 @@ const badgeVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
         brand: "bg-brand/10 text-brand [a]:hover:bg-brand/15",
+        // `highlight-foreground` is tuned for the solid button fill, so on this
+        // translucent tint it disappears in dark mode — use the accent itself there.
         highlight:
-          "bg-highlight/15 text-highlight-foreground [a]:hover:bg-highlight/20",
+          "bg-highlight/15 text-highlight-foreground dark:text-highlight [a]:hover:bg-highlight/20",
         success: "bg-success/12 text-success [a]:hover:bg-success/20",
         warning: "bg-warning/15 text-warning [a]:hover:bg-warning/25",
         destructive:

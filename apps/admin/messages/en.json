@@ -30,7 +30,9 @@
       "Role-based access, wired end to end",
       "Audit-ready tables and actions",
       "The same tokens as your product apps"
-    ]
+    ],
+    "badge": "Restricted console access",
+    "backHome": "Back to home"
   },
   "nav": {
     "groupMain": "Main",

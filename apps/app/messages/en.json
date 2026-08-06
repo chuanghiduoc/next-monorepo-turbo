@@ -30,7 +30,9 @@
       "Cookie-based auth, end to end",
       "Typed API client and hooks",
       "Dark mode and i18n out of the box"
-    ]
+    ],
+    "badge": "Secure workspace access",
+    "backHome": "Back to home"
   },
   "nav": {
     "groupMain": "Main",

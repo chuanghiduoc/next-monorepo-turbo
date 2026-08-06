@@ -1,10 +1,14 @@
-import { Check } from "lucide-react"
+import { ArrowLeft, CircleCheck } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import type { ReactNode } from "react"
+
+import { Badge } from "@workspace/ui/components/badge"
+import { Button } from "@workspace/ui/components/button"
 
 import { BrandMark } from "@/components/brand-mark"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Link } from "@/i18n/navigation"
 
 export async function generateMetadata({
   params,
@@ -25,60 +29,63 @@ export default async function AuthLayout({
   const points = t.raw("brandPoints") as string[]
 
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      {/* Brand panel */}
-      <aside className="grain relative hidden overflow-hidden bg-foreground p-12 text-background lg:flex lg:flex-col">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-10 -right-20 h-72 w-72 rounded-full bg-brand/30 blur-[100px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-brand/15 blur-[100px]"
-        />
+    <main className="min-h-screen bg-background">
+      <section className="mx-auto grid min-h-screen w-full max-w-6xl px-4 py-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <aside className="hidden border-r pr-10 lg:flex lg:flex-col lg:justify-between">
+          <Link href="/" className="w-fit">
+            <BrandMark />
+          </Link>
 
-        <BrandMark
-          label="turbo/app"
-          className="relative text-background [&_span:last-child]:text-background"
-        />
+          <div className="max-w-md space-y-6">
+            <Badge variant="secondary">{t("badge")}</Badge>
+            <div className="space-y-3">
+              <p className="text-2xl font-semibold tracking-tight text-balance">
+                {t("brandTitle")}
+              </p>
+              <p className="text-sm leading-6 text-muted-foreground">
+                {t("brandSubtitle")}
+              </p>
+            </div>
+            <div className="space-y-3">
+              {points.map((point) => (
+                <div
+                  key={point}
+                  className="flex items-start gap-3 text-sm text-muted-foreground"
+                >
+                  <CircleCheck
+                    className="mt-0.5 size-4 shrink-0 text-foreground"
+                    aria-hidden="true"
+                  />
+                  <p>{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className="relative mt-auto">
-          <h2 className="font-heading text-4xl leading-tight font-medium tracking-tight text-balance">
-            {t("brandTitle")}
-          </h2>
-          <p className="mt-4 max-w-md text-background/70">
-            {t("brandSubtitle")}
+          <p className="text-xs text-muted-foreground">
+            © 2026 turbo/starter — MIT
           </p>
-          <ul className="mt-8 space-y-3">
-            {points.map((point) => (
-              <li key={point} className="flex items-center gap-3">
-                <span className="grid size-5 shrink-0 place-items-center rounded-full bg-brand text-brand-foreground">
-                  <Check className="size-3" strokeWidth={3} />
-                </span>
-                <span className="text-sm text-background/85">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        </aside>
 
-        <p className="relative mt-12 font-mono text-xs text-background/40">
-          © 2026 turbo/starter — MIT
-        </p>
-      </aside>
+        <div className="flex flex-col lg:pl-10">
+          <div className="flex items-center justify-between gap-2">
+            <Button variant="ghost" asChild>
+              <Link href="/">
+                <ArrowLeft aria-hidden="true" />
+                {t("backHome")}
+              </Link>
+            </Button>
+            <div className="flex items-center gap-1.5">
+              <LocaleSwitcher />
+              <ThemeToggle />
+            </div>
+          </div>
 
-      {/* Form panel */}
-      <div className="relative flex flex-col px-5 py-6 sm:px-8">
-        <div className="flex items-center justify-between">
-          <BrandMark className="lg:hidden" />
-          <div className="ml-auto flex items-center gap-1.5">
-            <LocaleSwitcher />
-            <ThemeToggle />
+          <div className="flex flex-1 items-center justify-center py-10">
+            <div className="w-full max-w-md">{children}</div>
           </div>
         </div>
-        <div className="flex flex-1 items-center justify-center py-10">
-          <div className="w-full max-w-sm">{children}</div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }

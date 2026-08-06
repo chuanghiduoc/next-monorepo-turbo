@@ -17,7 +17,20 @@
     "registerSubtitle": "Bắt đầu workspace miễn phí.",
     "signInFailed": "Đăng nhập thất bại",
     "signUpFailed": "Tạo tài khoản thất bại",
-    "accountCreated": "Đã tạo tài khoản"
+    "accountCreated": "Đã tạo tài khoản",
+    "badge": "Truy cập workspace an toàn",
+    "backHome": "Về trang chủ",
+    "noAccount": "Chưa có tài khoản?",
+    "haveAccount": "Đã có tài khoản?",
+    "signUpLink": "Đăng ký",
+    "signInLink": "Đăng nhập",
+    "brandTitle": "Mọi thứ đấu nối sẵn. Không gì cản đường.",
+    "brandSubtitle": "Cùng một phiên hoạt động ở trình duyệt, server component và middleware — không cần lớp đấu nối.",
+    "brandPoints": [
+      "Xác thực bằng cookie, trọn vẹn",
+      "API client và hook có kiểu",
+      "Dark mode và i18n sẵn dùng"
+    ]
   },
   "dashboard": {
     "title": "Bảng điều khiển",
@@ -46,7 +59,25 @@
       "subtitle": "Bộ khởi tạo Turborepo cấp production với ba app đã đấu nối sẵn, UI dùng chung, API client có kiểu, xác thực, đa ngôn ngữ và kiểm thử — để ngày đầu tiên đã như ngày thứ một trăm.",
       "ctaPrimary": "Bắt đầu ngay",
       "ctaSecondary": "Xem tài liệu",
-      "note": "Giấy phép MIT · không khoá chân · clone là chạy"
+      "note": "Giấy phép MIT · không khoá chân · clone là chạy",
+      "card": {
+        "title": "Bạn có sẵn ngay từ ngày đầu",
+        "subtitle": "Nền tảng chung mà cả ba app trong repo này đều dùng.",
+        "items": [
+          {
+            "title": "Một design system dùng chung",
+            "desc": "Một package shadcn/ui duy nhất giữ token, dark mode và toàn bộ primitive — cả ba app cùng import."
+          },
+          {
+            "title": "Gọi API cùng origin, có kiểu",
+            "desc": "Trình duyệt chỉ gọi /api/*; Next proxy sang backend và các hook React Query vẫn giữ nguyên kiểu."
+          },
+          {
+            "title": "Ba bề mặt app đã đấu nối",
+            "desc": "Trang marketing, dashboard sản phẩm và console quản trị — khác cổng, chung phiên, chung thư viện component."
+          }
+        ]
+      }
     },
     "trust": "Những mảnh ghép đáng tin, đã lắp sẵn cho bạn",
     "features": {

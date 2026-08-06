@@ -186,15 +186,15 @@ export default function PreviewPage() {
         <Section id="type" eyebrow="Foundations" title="Typography">
           <Card>
             <CardContent className="space-y-4 py-6">
-              <p className="font-display text-4xl font-semibold tracking-tight">
-                Display · Bricolage Grotesque
+              <p className="font-heading text-4xl font-semibold tracking-tight">
+                Heading · Inter 36px
               </p>
               <p className="font-heading text-2xl font-semibold">
-                Heading · display grotesk 24px
+                Subheading · Inter 24px
               </p>
               <p className="text-base">
-                Body · Geist Sans 16px — the quick brown fox jumps over the lazy
-                dog. Readable, neutral, modern.
+                Body · Inter 16px — the quick brown fox jumps over the lazy dog.
+                Readable, neutral, modern.
               </p>
               <p className="font-mono text-sm text-muted-foreground">
                 Mono · Geist Mono — 0123456789 · const app = &quot;turbo&quot;
@@ -328,7 +328,7 @@ export default function PreviewPage() {
                   <CardDescription className="font-mono text-[11px] tracking-[0.14em] uppercase">
                     {s.label}
                   </CardDescription>
-                  <CardTitle className="font-display text-[2rem] leading-none font-semibold tabular-nums">
+                  <CardTitle className="text-[2rem] leading-none font-semibold tabular-nums">
                     {s.value}
                   </CardTitle>
                   <CardAction>
