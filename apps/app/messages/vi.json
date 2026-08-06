@@ -30,7 +30,9 @@
       "Xác thực bằng cookie, trọn vẹn",
       "API client và hook có kiểu",
       "Dark mode và i18n sẵn dùng"
-    ]
+    ],
+    "badge": "Truy cập workspace an toàn",
+    "backHome": "Về trang chủ"
   },
   "nav": {
     "groupMain": "Chính",

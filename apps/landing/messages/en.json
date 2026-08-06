@@ -17,7 +17,20 @@
     "registerSubtitle": "Start your free workspace.",
     "signInFailed": "Sign-in failed",
     "signUpFailed": "Sign-up failed",
-    "accountCreated": "Account created"
+    "accountCreated": "Account created",
+    "badge": "Secure workspace access",
+    "backHome": "Back to home",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Sign in",
+    "brandTitle": "Everything wired. Nothing in your way.",
+    "brandSubtitle": "The same session works across the browser, server components and middleware — no plumbing required.",
+    "brandPoints": [
+      "Cookie-based auth, end to end",
+      "Typed API client and hooks",
+      "Dark mode and i18n out of the box"
+    ]
   },
   "dashboard": {
     "title": "Dashboard",
@@ -46,7 +59,25 @@
       "subtitle": "A production-grade Turborepo starter with three wired apps, shared UI, a typed API client, auth, i18n and tests — so day one feels like day one hundred.",
       "ctaPrimary": "Start building",
       "ctaSecondary": "Read the docs",
-      "note": "MIT licensed · no lock-in · clone and go"
+      "note": "MIT licensed · no lock-in · clone and go",
+      "card": {
+        "title": "What you get on day one",
+        "subtitle": "The baseline every app in this repo already shares.",
+        "items": [
+          {
+            "title": "One shared design system",
+            "desc": "A single shadcn/ui package holds the tokens, dark mode and every primitive — all three apps import it."
+          },
+          {
+            "title": "Same-origin, typed API access",
+            "desc": "The browser only ever calls /api/*; Next proxies to your backend and the React Query hooks stay typed."
+          },
+          {
+            "title": "Three wired app surfaces",
+            "desc": "Marketing site, product dashboard and admin console — separate ports, one session, one component library."
+          }
+        ]
+      }
     },
     "trust": "Trusted primitives, assembled for you",
     "features": {

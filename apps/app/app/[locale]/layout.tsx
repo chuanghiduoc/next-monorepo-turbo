@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google"
+import { Geist_Mono, Inter } from "next/font/google"
 import { notFound } from "next/navigation"
 
 import "@workspace/ui/globals.css"
@@ -11,14 +11,8 @@ import { Providers } from "@/components/providers"
 import { env } from "@/lib/env"
 import { routing } from "@/i18n/routing"
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
+const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" })
 const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
-// Characterful display grotesk for headings + metrics — the anti-slop signal.
-const fontDisplay = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-})
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -63,12 +57,11 @@ export default async function LocaleLayout({
       className={cn(
         "antialiased",
         fontMono.variable,
-        fontDisplay.variable,
         "font-sans",
-        geist.variable
+        fontSans.variable
       )}
     >
-      <body className="[--font-heading:var(--font-display)]">
+      <body>
         <NextIntlClientProvider>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>

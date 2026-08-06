@@ -31,7 +31,7 @@ export async function Features() {
             return (
               <article
                 key={item.tag}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-lg hover:shadow-black/5"
+                className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 transition-colors hover:border-brand"
               >
                 <span
                   aria-hidden

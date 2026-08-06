@@ -34,8 +34,7 @@ export async function Showcase() {
         </div>
 
         <div className="relative">
-          <div className="absolute -inset-3 -z-10 rounded-3xl bg-brand/10 blur-2xl" />
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/10">
+          <div className="overflow-hidden rounded-2xl border border-border bg-card">
             <div className="flex items-center justify-between border-b border-border px-5 py-3">
               <span className="font-mono text-xs text-muted-foreground">
                 lib/auth-server.ts

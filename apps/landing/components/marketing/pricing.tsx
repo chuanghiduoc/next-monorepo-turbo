@@ -36,7 +36,7 @@ export async function Pricing() {
                 className={cn(
                   "relative flex flex-col rounded-2xl border p-8 transition-all",
                   featured
-                    ? "border-brand bg-card shadow-xl shadow-brand/10 lg:-my-3 lg:scale-[1.02]"
+                    ? "border-brand bg-card lg:-my-3"
                     : "border-border bg-card/60 hover:border-foreground/20"
                 )}
               >

@@ -30,7 +30,9 @@
       "Phân quyền theo vai trò, đấu nối trọn vẹn",
       "Bảng và thao tác sẵn sàng cho kiểm toán",
       "Cùng bộ token với các app sản phẩm"
-    ]
+    ],
+    "badge": "Truy cập console hạn chế",
+    "backHome": "Về trang chủ"
   },
   "nav": {
     "groupMain": "Chính",
